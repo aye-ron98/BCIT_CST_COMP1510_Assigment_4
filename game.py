@@ -11,9 +11,9 @@ def game():  # called from main
     board = make_board(rows, columns)
     character: object = make_character()
     achieved_goal = False
+    describe_current_location(board, character)
     while not achieved_goal:
         # Tell the user where they are
-        describe_current_location(board, character)
         direction = get_user_choice(character)
         valid_move = validate_move(direction)
         if valid_move:
