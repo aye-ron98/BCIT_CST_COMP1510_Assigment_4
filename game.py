@@ -20,8 +20,8 @@ def game():  # called from main
             # move_character(character)
             describe_current_location(board, character)
             there_is_a_challenge = check_for_challenges(character, board)
-            # if there_is_a_challenge:
-            # execute_challenge_protocol(character)
+            if there_is_a_challenge:
+                execute_challenge_protocol(character, board)
             if character_has_leveled(character):
                 execute_glow_up_protocol(character)
                 # achieved_goal = check_if_goal_attained(character)
@@ -54,7 +54,7 @@ def get_user_choice(character):
             continue
 
     print(character)
-    return True
+    return character, True
 
 
 def make_character():
@@ -71,13 +71,6 @@ def describe_current_location(board, character):
 
 def validate_move(move):
     if move:
-        return True
-
-
-def check_for_challenges(character, board):
-    if board[(character['location X'], character['location Y'])] != 'empty room':
-        return False
-    else:
         return True
 
 
@@ -113,6 +106,75 @@ def generate_encounters():
         return 'medium challenge'
     if dice_roll < 101:
         return 'hard challenge'
+
+def check_for_challenges(character, board):
+    if board[(character['location X'], character['location Y'])] == 'empty room':
+        return False
+    else:
+        return True
+def execute_challenge_protocol(character, board):
+    x_y_coordinate = (character['location X'], character['location Y'])
+    if board[x_y_coordinate] == 'light challenge':
+        return easy_challenge(character)
+    elif board[x_y_coordinate] == 'medium challenge':
+        return medium_challenge(character)
+    elif board[x_y_coordinate] == 'hard challenge':
+        return hard_challenge(character)
+
+def easy_challenge(character):
+    xp = character['xp']
+    hp = character['hp']
+    answer = str(input('what is 1 + 1?: '))
+
+    answers = [1, 2, 3, 4]
+    for choice, direction in enumerate(answers, 1):
+        print(choice, direction)
+
+    if answer != '2':
+        print('wrong')
+        character['hp'] -= 1
+        return character
+    else:
+        print('correct')
+        character['xp'] += 1
+        return character
+
+
+def medium_challenge(character):
+    xp = character['xp']
+    hp = character['hp']
+    answer = str(input('what is 1 + 2?: '))
+
+    answers = [1, 2, 3, 4]
+    for choice, direction in enumerate(answers, 1):
+        print(choice, direction)
+
+    if answer != '3':
+        print('wrong')
+        character['hp'] -= 1
+        return character
+    else:
+        print('correct')
+        character['xp'] += 1
+        return character
+
+def hard_challenge(character):
+    xp = character['xp']
+    hp = character['hp']
+    answer = str(input('what is 5 + 5?: '))
+
+    answers = [5, 10, 15, 20]
+    for choice, direction in enumerate(answers, 1):
+        print(choice, direction)
+
+    if answer != '10':
+        print('wrong')
+        character['hp'] -= 1
+        return character
+    else:
+        print('correct')
+        character['xp'] += 1
+        return character
 
 
 def make_board(rows, columns):
