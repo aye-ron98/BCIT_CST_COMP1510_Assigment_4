@@ -5,6 +5,7 @@ A01280188
 import battle_mechanics
 import world_building
 import movment
+import character_condition
 
 
 def game():  # called from main
@@ -24,10 +25,10 @@ def game():  # called from main
             there_is_a_challenge = battle_mechanics.check_for_challenges(character, board)
             if there_is_a_challenge:
                 battle_mechanics.execute_challenge_protocol(character, board)
-            if battle_mechanics.character_has_leveled(character):
-                battle_mechanics.execute_glow_up_protocol(character)
+            if character_condition.character_has_leveled(character):
+                character_condition.execute_glow_up_protocol(character)
                 # achieved_goal = check_if_goal_attained(character)
-            if battle_mechanics.character_health(character):
+            if character_condition.character_health(character):
                 break
             else:
                 continue
