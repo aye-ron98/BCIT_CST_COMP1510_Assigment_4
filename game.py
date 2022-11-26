@@ -26,8 +26,10 @@ def game():  # called from main
             if battle_mechanics.character_has_leveled(character):
                 battle_mechanics.execute_glow_up_protocol(character)
                 # achieved_goal = check_if_goal_attained(character)
-            if battle_mechanics.character_health:
+            if battle_mechanics.character_health(character):
                 break
+            else:
+                continue
         else:
             # Tell the user they can’t go in that direction
             print('better luck next time! You died')
