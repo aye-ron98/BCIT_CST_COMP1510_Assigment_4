@@ -35,8 +35,18 @@ def generate_encounters():
 
 
 def describe_current_location(board, character):
+
     character_location = (character['location X'], character['location Y'])
-    print(board[character_location])
+    for x in range(0, 5):
+        print('\n') if x != 0 else print(end='')
+        for y in range(0, 5):
+            if (x, y) == character_location:
+                print('(!)  ', end='')
+            else:
+                print(' +   ', end='')
+
+    print('\n', board[character_location])
+    return character
 
 
 def validate_move(move):
