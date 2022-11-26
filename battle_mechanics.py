@@ -23,7 +23,7 @@ def check_for_challenges(character, board):
 def execute_challenge_protocol(character, board):
     x_y_coordinate = (character['location X'], character['location Y'])
     if board[x_y_coordinate] == 'light challenge':
-        return battle(character, enemy.make_enemy(character), roll_initaitve())
+        battle(character, enemy.make_enemy(character), roll_initaitve())
 
 
 def roll_initaitve():
@@ -44,19 +44,19 @@ def battle(character, opponent, roll_initaitve):
     if roll_initaitve:
         while character['hp'] != 0 or opponent['hp'] != 0:
             print('\nQuickly! To battle!\n')  # start of player turn
-            for choice, move in enumerate(player_moves[1], len(player_moves)):
-                print(choice, move)
+            for choice in range(0, len(player_moves)):
+                print(choice + 1, player_moves[choice][0])
 
-            move = int(input('\nwhat is your move?: '))
+            move = int(input('\nwhat is your move?: ')) - 1
 
-            if 0 < move < 5:
+            if 0 < move < len(player_moves) + 1:
                 if player_moves[move][1] < 0:
-                    player_guard = player_moves[move][0]
+                    player_guard = abs(player_moves[move][1])
                     print('\nYou chose {0}, the next attack will deal {1} less damage!'
-                          .format(player_moves[move], abs(player_moves[move][0])))
+                          .format(player_moves[move][0], player_guard))
                 else:
                     player_damage = 0
-                    player_damage = player_moves[move][1] - abs(enemy_guard) \
+                    player_damage = player_moves[move][0] - abs(enemy_guard) \
                         if player_damage > 0 else player_damage == 0
                     opponent['hp'] -= player_damage
                     print('\nYou dealt {0} damage to thr enemy!\n'
@@ -64,18 +64,20 @@ def battle(character, opponent, roll_initaitve):
                 if opponent['hp'] == 0:
                     print('Congratulations! You have defeated {}'.format(opponent['name']))
                     break
+            else:
+                print('that is not a valid move!')
 
             enemy_guard = 0
             enemy_choice = enemy_moves[randint(1, len(enemy_moves))]  # start of enemy turn
             print('\nenemy chose {}!\n'.format(enemy_choice[0]))
 
-            if enemy_choice < 0:
-                enemy_guard = enemy_choice[1]
+            if enemy_choice[1] < 0:
+                enemy_guard = abs(enemy_choice[1])
                 print('Your next attack will now do {0} less damage to {1}!\n'
-                      .format((abs(enemy_guard)), opponent['name']))
+                      .format(enemy_guard, opponent['name']))
             else:
                 enemy_damage = 0
-                enemy_damage = enemy_choice[1] - abs(player_guard) if enemy_damage > 0 else enemy_damage == 0
+                enemy_damage = enemy_choice[1] - player_guard if enemy_damage > 0 else enemy_damage == 0
                 character['hp'] -= enemy_damage
                 print('{0} dealt {1} damage to you! You are now at {2} health!'
                       .format(opponent['name'], enemy_damage, character['hp']))
@@ -88,13 +90,13 @@ def battle(character, opponent, roll_initaitve):
             enemy_choice = enemy_moves[randint(1, len(enemy_moves))]  # start of enemy turn
             print('\nenemy chose {}!\n'.format(enemy_choice[0]))
 
-            if enemy_choice < 0:
-                enemy_guard = enemy_choice[1]
+            if enemy_choice[1] < 0:
+                enemy_guard = abs(enemy_choice[1])
                 print('Your next attack will now do {0} less damage to {1}!\n'
-                      .format((abs(enemy_guard)), opponent['name']))
+                      .format(enemy_guard, opponent['name']))
             else:
                 enemy_damage = 0
-                enemy_damage = enemy_choice[1] - abs(player_guard) if enemy_damage > 0 else enemy_damage == 0
+                enemy_damage = enemy_choice[1] - player_guard if enemy_damage > 0 else enemy_damage == 0
                 character['hp'] -= enemy_damage
                 print('{0} dealt {1} damage to you! You are now at {2} health!'
                       .format(opponent['name'], enemy_damage, character['hp']))
@@ -104,19 +106,19 @@ def battle(character, opponent, roll_initaitve):
             player_guard = 0
 
             print("it's your turn now!\n")  # start of player turn
-            for choice, move in enumerate(player_moves[1], len(player_moves)):
-                print(choice, move)
+            for choice in range(0, len(player_moves)):
+                print(choice + 1, player_moves[choice][0])
 
-            move = int(input('\nwhat is your move?: '))
+            move = int(input('\nwhat is your move?: ')) - 1
 
-            if 0 < move < 5:
+            if 0 < move < len(player_moves) + 1:
                 if player_moves[move][1] < 0:
-                    player_guard = player_moves[move][0]
+                    player_guard = abs(player_moves[move][1])
                     print('\nYou chose {0}, the next attack will deal {1} less damage!'
-                          .format(player_moves[move], abs(player_moves[move][0])))
+                          .format(player_moves[move][0], player_guard))
                 else:
                     player_damage = 0
-                    player_damage = player_moves[move][1] - abs(enemy_guard) \
+                    player_damage = player_moves[move][1] - enemy_guard \
                         if player_damage > 0 else player_damage == 0
                     opponent['hp'] -= player_damage
                     print('\nYou dealt {0} damage to thr enemy!\n'
@@ -124,6 +126,8 @@ def battle(character, opponent, roll_initaitve):
                 if opponent['hp'] == 0:
                     print('Congratulations! You have defeated {}'.format(opponent['name']))
                     break
+            else:
+                print('that is not a valid move!')
             enemy_guard = 0
 
     print('the battle is over! You are now at {} health'.format(character['hp']))
@@ -138,7 +142,7 @@ def battle_cards():
     attack_combos = list(combinations(attacks.items(), 3))
     defense_combos = list(combinations(defense.items(), 2))
 
-    return attack_combos[randint(1, len(attack_combos))] + defense_combos[randint(1, len(defense_combos))]
+    return attack_combos[randint(1, len(attack_combos) - 1)] + defense_combos[randint(1, len(defense_combos) - 1)]
 
 
 def main():
