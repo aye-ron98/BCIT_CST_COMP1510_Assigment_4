@@ -49,11 +49,6 @@ def describe_current_location(board, character):
     return character
 
 
-def validate_move(move):
-    if move:
-        return True
-
-
 def main():
     main()
 
