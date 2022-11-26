@@ -4,6 +4,7 @@ A01280188
 """
 import battle_mechanics
 import world_building
+import movment
 
 
 def game():  # called from main
@@ -15,8 +16,8 @@ def game():  # called from main
     world_building.describe_current_location(board, character)
     while not achieved_goal:
         # Tell the user where they are
-        direction = battle_mechanics.get_user_choice(character)
-        valid_move = world_building.validate_move(direction)
+        direction = movment.get_user_choice(character)
+        valid_move = movment.validate_move(direction)
         if valid_move:
             # move_character(character)
             world_building.describe_current_location(board, character)
