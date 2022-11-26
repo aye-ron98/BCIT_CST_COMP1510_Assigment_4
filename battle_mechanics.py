@@ -23,7 +23,7 @@ def check_for_challenges(character, board):
 def execute_challenge_protocol(character, board):
     x_y_coordinate = (character['location X'], character['location Y'])
     if board[x_y_coordinate] == 'light challenge':
-        return battle(character, enemy.make_enemy(), roll_initaitve())
+        return battle(character, enemy.make_enemy(character), roll_initaitve())
 
 
 def roll_initaitve():

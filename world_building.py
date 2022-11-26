@@ -24,14 +24,10 @@ def make_board(rows, columns):
 def generate_encounters():
     dice_roll = random.randint(1, 100)
 
-    if dice_roll < 45:
+    if dice_roll < 65:
         return 'empty room'
-    if dice_roll < 70:
+    if dice_roll < 35:
         return 'light challenge'
-    if dice_roll < 80:
-        return 'medium challenge'
-    if dice_roll < 101:
-        return 'hard challenge'
 
 
 def describe_current_location(board, character):
