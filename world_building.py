@@ -11,7 +11,7 @@ import random
 
 def make_character():
     character_name = input('What is your name?: ')
-    character = {'name': character_name, 'hp': 100, 'xp': 0, 'level': 1, 'location X': 0, 'location Y': 0,
+    character = {'name': character_name, 'hp': 100, 'xp': 0, 'level': 1, 'location X': 4, 'location Y': 0,
                  'glow up': False, 'level cap': False, 'goal': False}
     return character
 
@@ -24,9 +24,9 @@ def make_board(rows, columns):
 def generate_encounters():
     dice_roll = random.randint(1, 100)
 
-    if dice_roll < 65:
+    if dice_roll <= 1:
         return 'empty room'
-    if dice_roll < 35:
+    if dice_roll > 2:
         return 'light challenge'
 
 
