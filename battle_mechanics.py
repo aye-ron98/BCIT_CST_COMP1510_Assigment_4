@@ -53,11 +53,13 @@ def character_has_leveled(character):
 
     return character
 
+
 def character_health(character):
     if character['hp'] == 0:
         return True
     else:
         return False
+
 
 def execute_glow_up_protocol(character):
     if character['glow up']:
