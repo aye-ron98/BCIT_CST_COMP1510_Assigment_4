@@ -6,7 +6,7 @@ functions related to moving around the map
 
 
 def get_user_choice(character):
-    directions = ['move north', 'move east', 'move south', 'move west']
+    directions = ['move south', 'move east', 'move north', 'move west']
     for choice, direction in enumerate(directions, 1):
         print(choice, direction)
 
