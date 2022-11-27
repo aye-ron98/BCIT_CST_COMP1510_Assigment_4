@@ -43,6 +43,13 @@ def battle(character, opponent, player_goes_first):
     opponent['moves'] = battle_cards()
     player_guard = character['defence']
     enemy_guard = opponent['defence']
+
+    if opponent['damage'] != 0 and character['level'] != 1:
+        print('Watch out! {0} has been hitting the gym! All their attacks will have a +{1} effect!'
+              .format(opponent['name'], opponent['damage']))
+    else:
+        print('{0 has been meditating lately, all your attacks will have a -{1} effect!}'
+              .format(opponent['name'], opponent['damage']))
     if player_goes_first:
         while True:
             player_choice = player_attack(character, enemy_guard)
