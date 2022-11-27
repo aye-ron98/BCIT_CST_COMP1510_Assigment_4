@@ -6,8 +6,15 @@ function relating to enemy generation
 from random import randint
 
 
+def make_final_boss():
+    final_boss = {'name': enemy_name(), 'moves': [], 'hp': 50}
+
+    return final_boss
+
+
 def make_enemy(character):
-    enemy = {'name': enemy_name(), 'moves': [], 'hp': character['hp'] // 10 if character['level'] == 1 or character['xp'] < 3 else 20}
+    enemy = {'name': enemy_name(), 'moves': [],
+             'hp': character['hp'] // 2.5 if character['level'] == 1 or character['xp'] < 3 else 35}
     return enemy
 
 
@@ -18,7 +25,6 @@ def enemy_name():
 
 
 def main():
-    # make_enemy(character={'hp': 100, 'level': 1, 'xp': 3})
     main()
 
 
