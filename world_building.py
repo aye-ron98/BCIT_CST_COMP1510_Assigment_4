@@ -48,7 +48,7 @@ def generate_encounters() -> str:
     dice_roll = random.randint(1, 2)
 
     if dice_roll == 1:
-        return 'empty room'
+        return 'light challenge'
     if dice_roll == 2:
         return 'light challenge'
 
