@@ -42,15 +42,21 @@ def execute_glow_up_protocol(character):
         for choice, item in enumerate(upgradeables, 1):
             print(item, choice)
 
-        user_choice = str(input('what would you like?'))
+        user_choice = str(input('\nwhat would you like?'))
 
         if user_choice == 1:
+            print('\nYour health is now permanently increased by 10, Your total health is now {}'
+                  .format(character['hp'] + 10))
             character['hp'] += 10
         if user_choice == 2:
+            print('\nAll attacks now have a +10 attack on top of their normal stats, beware enemy defences, they may '
+                  'still defend against you!')
             character['damage'] += 10
         if user_choice == 3:
+            print('\nAll incoming attacks are now reduced by 10!')
             character['defence'] += 10
 
+    print(character)
     return character
 
 
