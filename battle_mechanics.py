@@ -13,17 +13,75 @@ from random import randint
 import enemy
 
 
-def check_for_challenges(character, board):
-    if board[(character['location X'], character['location Y'])] == 'empty room':
-        return False
-    else:
-        return True
-
-
 def execute_challenge_protocol(character, board):
     x_y_coordinate = (character['location X'], character['location Y'])
+    if board[x_y_coordinate] == 'empty room':
+        generate_scenario(character)
     if board[x_y_coordinate] == 'light challenge':
         battle(character, enemy.make_enemy(character), roll_initaitve())
+
+
+def generate_scenario(player):
+    scenario_number = randint(1, 5)
+
+    if scenario_number == 1:
+        treasure_picker = randint(0, 4)
+        treasures = ['stick', 'sword', 'battering ram', 'trumpet', 'flag pole']
+        print("\nIt's your luck day!, You stumble across an armory, you leave with a {0}. ALl damage is now increased "
+              "by +{1}."
+              .format(treasures[treasure_picker], treasure_picker + 3))
+        player['damage'] += treasure_picker + 3
+        return player
+    if scenario_number == 2:
+        health_gain = randint(1, 10)
+        print('\nYou come across a hospital, advertisers feed you a lot of multivitamins, you gain {} health'
+              .format(health_gain))
+        player['hp'] += health_gain
+    if scenario_number == 3:
+        defence_gain = randint(0, 4)
+        shields = ['stick shield', 'aluminum shield', 'styrofoam shield', 'imaginary shield', 'kevelar vest']
+        print('\nYou stubmle across an antique shop and leave with a {0}, all attacks are now reduced by {1}'
+              .format(shields[defence_gain], defence_gain))
+        player['defence'] += defence_gain
+    if scenario_number == 4:
+        print('\nA stander asks you:\n I’m tall when I’m young, and I’m short when I’m old. What am I?')
+        answers = ['a candle', 'a human', 'a tree', 'an eraser']
+
+        while True:
+            for choice, answer in enumerate(answers):
+                print(choice, ': ', answer)
+            user_input = input('\nYour answer?: ')
+            if user_input == '1':
+                print('Correct! You gain 1xp, you are now at {0}'.format(player['xp'] + 1))
+                player['xp'] += 1
+                break
+            elif '2' <= user_input <= '4':
+                print('The right answer was a candle! You lave with nothing')
+                break
+            else:
+                print('that is not an option, try again')
+                continue
+
+    if scenario_number == 5:
+        print('\nA stander asks you:\n What month of the year has 28 days?')
+        answers = ['all of them', 'february', 'december', "what's a month?"]
+
+        while True:
+            for choice, answer in enumerate(answers):
+                print(choice, ': ', answer)
+            user_input = input('\nYour answer?: ')
+            if user_input == '1':
+                print('Correct! You gain 1xp, you are now at {0}'.format(player['xp'] + 1))
+                player['xp'] += 1
+                break
+            elif '2' <= user_input <= '4':
+                print('The right answer was a all of them! You lave with nothing')
+                break
+            else:
+                print('that is not an option, try again.')
+                continue
+
+    return player
 
 
 def roll_initaitve():
