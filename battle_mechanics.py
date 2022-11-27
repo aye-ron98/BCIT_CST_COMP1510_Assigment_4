@@ -9,11 +9,20 @@ functions related to fighting
 """
 from itertools import combinations
 from random import randint
-
 import enemy
 
 
-def execute_challenge_protocol(character, board):
+def execute_challenge_protocol(character: dict, board: dict) -> None:
+    """
+    Compare board value against character values.
+
+    Calls helper functions dependent on board and character values. Returns None
+    :param character: a dictionary
+    :param board: a dictionary
+    :precondition character: must contain key 'location X' and 'location Y'
+    :precondition board: keys must be tuples of length two comprised positive integers
+    :postcondition: evaluate values of board
+    """
     x_y_coordinate = (character['location X'], character['location Y'])
     if board[x_y_coordinate] == 'empty room':
         generate_scenario(character)
@@ -21,7 +30,16 @@ def execute_challenge_protocol(character, board):
         battle(character, enemy.make_enemy(character), roll_initaitve())
 
 
-def generate_scenario(player):
+def generate_scenario(player: dict) -> dict:
+    """
+    Update player values pending user input.
+
+    :param player: a dictionary
+    :precondition player: must contain key values 'hp', 'xp', 'damage', and 'defence'
+    :precondition player: values must be integers
+    :postcondition player: updates values pending user input
+    :return: dictionary player
+    """
     scenario_number = randint(1, 5)
 
     if scenario_number == 1:
@@ -84,11 +102,15 @@ def generate_scenario(player):
     return player
 
 
-def roll_initaitve():
-    character = randint(1, 10)
-    opponent = randint(1, 10)
+def roll_initaitve() -> bool:
+    """
+    Randonly return True or False.
 
-    if character >= opponent:
+    :return: boolean True or False
+    """
+    coin_flip = randint(1, 2)
+
+    if coin_flip == 1:
         print('\nYou are lucky today, you will attack first!\n')
         return True
     else:
@@ -96,7 +118,20 @@ def roll_initaitve():
         return False
 
 
-def battle(character, opponent, player_goes_first):
+def battle(character: dict, opponent: dict, player_goes_first: bool) -> dict:
+    """
+    Updates character dictionary pending user input.
+
+    :param character: a dictionary
+    :param opponent: a dictionary
+    :param player_goes_first: boolean True or False
+    :precondition character: must contain keys 'level', 'hp', 'moves', 'damage', 'defence'
+    :precondition opponent: must contain keys 'level', 'hp', 'moves', 'damage', 'defence'
+    :precondition: values of 'level', 'hp', 'damage', 'defence' must be positive integers
+    :precondition: calues of 'moves' must be list
+    :postcondition: will update values of 'level', 'hp', 'moves', 'damage', 'defence' pending user input
+    :return: the dictionary character
+    """
     character['moves'] = battle_cards()
     opponent['moves'] = battle_cards()
     player_guard = character['defence']
@@ -180,7 +215,17 @@ def battle(character, opponent, player_goes_first):
     return character
 
 
-def player_attack(character, enemy_guard):
+def player_attack(character: dict, enemy_guard: int) -> int:
+    """
+    Calculate an integer to return pending values of character and enemy_guard
+
+    :param character: a dictionary
+    :param enemy_guard: a positive integer
+    :precondition character: must contain key 'damage'
+    :precondition character: value must be a positive integer
+    :postcondition: an integer value for attack or defense
+    :return: an integer
+    """
     cards_on_hand = character['moves']
     print('Quickly! To battle!\n')  # start of player turn
     while True:
@@ -201,11 +246,36 @@ def player_attack(character, enemy_guard):
                 print('You chose {1} and dealt {0} damage.'.format(player_damage, cards_on_hand[move][0]), end='')
             return player_damage
         else:
-            print('that is not a valid move!')
+            print('{}, that is not a valid move!'.format(character['name']))
             continue
 
 
-def enemy_attack(opponent, player_guard, next_attack):
+def enemy_attack(opponent: dict, player_guard: int, next_attack: tuple) -> int:
+    """
+    Calculate an integer to return pending values of character and enemy_guard
+
+    :param opponent: a dictionary
+    :param player_guard: a positive integer
+    :param next_attack: a tupple of length 2
+    :precondition opponent: must contain key 'damage' and 'name'
+    :precondition opponent: damage value must be a positive integer
+    :precondition opponent: name value must be string
+    :precondition next_attack: first item must be string second must be a positive integer
+    :postcondition: an integer value for attack or defense
+    :return: an integer
+    >>> monster = {'name': 'keanu', 'damage': 5}
+    >>> guard = 3
+    >>> attack = ('example', 2)
+    >>> enemy_attack(monster, guard, attack)
+    keanu chose example!
+    keanu dealt 4 damage to you!4
+    >>> monster = {'name': 'keanu', 'damage': 5}
+    >>> guard = 10
+    >>> attack = ('example', 2)
+    >>> enemy_attack(monster, guard, attack)
+    keanu chose example!
+    keanu dealt 0 damage to you!0
+    """
     print('{0} chose {1}!'.format(opponent['name'], next_attack[0]))
 
     if next_attack[1] < 0:
@@ -220,7 +290,11 @@ def enemy_attack(opponent, player_guard, next_attack):
         return enemy_damage
 
 
-def battle_cards():
+def battle_cards() -> tuple:
+    """
+    Generate a random tuple of tuples of length 5 and 2 respectively
+    :return: a tuple of tuples
+    """
     attacks = {'strike': 5, 'stab': 8, 'scare': 3, 'drop kick': 10, 'bite': 2, 'arrow': 10, 'ultimate': 20}
     defense = {'defend': -5, 'parry': -3, 'dodge': -10, 'guard': -8, 'garrison': -6}
 
@@ -231,8 +305,10 @@ def battle_cards():
 
 
 def main():
-    # main()
-    battle_cards()
+    """
+    Drive the program
+    """
+    main()
 
 
 if __name__ == '__main__':
