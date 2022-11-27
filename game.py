@@ -14,19 +14,19 @@ def game():  # called from main
     board = world_building.make_board(rows, columns)
     character = world_building.make_character()
     achieved_goal = False
-    # world_building.describe_current_location(board, character)
     while not achieved_goal:
         # Tell the user where they are
         world_building.describe_current_location(character)
-        direction = movment.get_user_choice(character)
-        # move_character(character)
+        movment.get_user_choice(character)
         world_building.describe_current_location(character)
-        # there_is_a_challenge = battle_mechanics.check_for_challenges(character, board)
-        # if there_is_a_challenge:
         battle_mechanics.execute_challenge_protocol(character, board)
         if character_condition.character_has_leveled(character):
             character_condition.execute_glow_up_protocol(character)
             # achieved_goal = check_if_goal_attained(character)
+        if character['level cap']:
+            battle_mechanics.execute_final_boss(character)
+            if character['hp'] > 0:
+                achieved_goal = True
         if character_condition.character_health(character):
             break
         else:
