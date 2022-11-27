@@ -9,7 +9,7 @@ functions related to world building
 import random
 
 
-def make_character():
+def make_character() -> dict:
     """
     Make a character dictionary
 
@@ -39,7 +39,7 @@ def make_board(rows: int, columns: int) -> dict:
     return board
 
 
-def generate_encounters():
+def generate_encounters() -> str:
     """
     Generate encounters randomly using random.randint
 
@@ -53,13 +53,11 @@ def generate_encounters():
         return 'light challenge'
 
 
-def describe_current_location(board: dict, character: dict):
+def describe_current_location(character: dict) -> None:
     """
     Print the game board and character.
 
-    :param board: a dictionary
     :param character: a dictionary
-    :precondition board: keys must tuples of length 2 containing only integers
     :precondition character: keys location X and location Y with values is required of character dictionary
     :precondition: values must be positive integers
     :postcondition: will print a board of len(board.keys()) x len(board.keys())
@@ -78,9 +76,7 @@ def describe_current_location(board: dict, character: dict):
 def main():
     """
     Drives the program
-
     """
-    main()
 
 
 if __name__ == '__main__':
