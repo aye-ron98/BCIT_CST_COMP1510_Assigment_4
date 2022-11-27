@@ -22,11 +22,11 @@ def make_board(rows, columns):
 
 
 def generate_encounters():
-    dice_roll = random.randint(1, 100)
+    dice_roll = random.randint(1, 2)
 
-    if dice_roll <= 1:
+    if dice_roll == 1:
         return 'empty room'
-    if dice_roll > 2:
+    if dice_roll == 2:
         return 'light challenge'
 
 
