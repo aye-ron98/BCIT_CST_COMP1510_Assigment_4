@@ -8,7 +8,15 @@ functions that check character status
 """
 
 
-def character_has_leveled(character):
+def character_has_leveled(character: dict) -> dict:
+    """
+    Updates values of character dictionary.
+
+    :param character: a dictionary.
+    :precondition character: must contain keys 'level', 'xp', 'hp', glow up'
+    :precondition character: values must be integer
+    :return: an updated dictionary character
+    """
     if character['level'] == 1:
         if character['xp'] == 3:
             character['level'] = 2
@@ -26,14 +34,31 @@ def character_has_leveled(character):
     return character
 
 
-def character_health(character):
+def character_health(character: dict) -> bool:
+    """
+    Check value of character dictionary key 'hp'. Returns True if value is != 0 else False.
+
+    Does not modify dictionary values.
+    :param character: a dictionary
+    :precondition character: must contain key 'hp'
+    :postcondition: will return True or False
+    :return: a boolean True or False
+    """
     if character['hp'] == 0:
         return True
     else:
         return False
 
 
-def execute_glow_up_protocol(character):
+def execute_glow_up_protocol(character: dict) -> dict:
+    """
+    Update character dictionary values
+
+    :param character: a dictionary
+    :precondition character: must contain keys 'glow up', 'damage', 'defence' 'hp'
+    :postcondition: will update character values pending user input
+    :return: the dictionary character
+    """
     if character['glow up']:
         print('\nCongratulations! you have leveled up!'
               'choose an upgradable from the following!\n')
