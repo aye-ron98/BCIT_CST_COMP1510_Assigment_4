@@ -7,14 +7,15 @@ from random import randint
 
 
 def make_final_boss():
-    final_boss = {'name': enemy_name(), 'moves': [], 'hp': 50}
+    final_boss = {'name': enemy_name(), 'moves': [], 'hp': 50, 'damage': 15}
 
     return final_boss
 
 
 def make_enemy(character):
     enemy = {'name': enemy_name(), 'moves': [],
-             'hp': character['hp'] // 2.5 if character['level'] == 1 or character['xp'] < 3 else 35}
+             'hp': character['hp'] // 2.5 if character['level'] == 1 or character['xp'] < 3 else 35,
+             'damage': 0 if character['level'] == 1 or character['xp'] < 3 else 10}
     return enemy
 
 
