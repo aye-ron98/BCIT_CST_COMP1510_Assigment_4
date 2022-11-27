@@ -47,7 +47,9 @@ def enemy_name() -> str:
 
 
 def main():
-    main()
+    """
+    Drives the program
+    """
 
 
 if __name__ == '__main__':
