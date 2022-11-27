@@ -11,6 +11,27 @@ from itertools import combinations
 from random import randint
 import enemy
 
+def execute_final_boss(character: dict) -> dict:
+    """
+    Change character 'complete goal' flag to true of player defeats boss.
+
+    :param character: a dictionary
+    :precondition character: must have key 'achieved goal'
+    :precondition character: value must be Boolean False
+    :precondition character: must have keys 'hp', 'damage', and 'defence'
+    :precondition character: values must be positive integers
+    :postcondition: upon beating final boss will change 'achieved goal' value to True
+    :return: an updated character dictionary
+    """
+    print('What out {}, its the final boss!'
+          'To help you out you are getting a power buff, +20 health, +10 attack, +10 defense'.format(character['name']))
+    character['hp'] += 20
+    character['damage'] += 10
+    character['defence'] += 10
+
+    battle(character, enemy.make_final_boss(), roll_initaitve())
+
+    return character
 
 def execute_challenge_protocol(character: dict, board: dict) -> None:
     """
