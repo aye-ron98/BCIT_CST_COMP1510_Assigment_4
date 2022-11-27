@@ -44,7 +44,7 @@ def character_health(character: dict) -> bool:
     :postcondition: will return True or False
     :return: a boolean True or False
     """
-    if character['hp'] == 0:
+    if character['hp'] < 0:
         return True
     else:
         return False
