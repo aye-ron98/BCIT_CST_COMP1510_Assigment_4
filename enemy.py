@@ -12,7 +12,7 @@ def make_final_boss() -> dict:
 
     :return: a dictionary of length 4
     """
-    final_boss = {'name': enemy_name(), 'moves': [], 'hp': 50, 'damage': 15}
+    final_boss = {'name': enemy_name(), 'moves': [], 'hp': 50, 'damage': 15, 'defence': 10}
 
     return final_boss
 
