@@ -71,6 +71,7 @@ def describe_current_location(character: dict) -> None:
                 print('(!)  ', end='')
             else:
                 print(' +   ', end='')
+    print('\n')
 
 
 def main():
