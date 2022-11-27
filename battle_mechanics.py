@@ -138,7 +138,7 @@ def enemy_attack(opponent, player_guard):
 
 
 def battle_cards():
-    attacks = {'strike': 5, 'stab': 8, 'scare': 3, 'drop kick': 10, 'bite': 2, 'arrow': 10, 'ultimate': 100}
+    attacks = {'strike': 5, 'stab': 8, 'scare': 3, 'drop kick': 10, 'bite': 2, 'arrow': 10, 'ultimate': 20}
     defense = {'defend': -5, 'parry': -3, 'dodge': -10, 'guard': -8, 'garrison': -6}
 
     attack_combos = list(combinations(attacks.items(), 3))
