@@ -42,7 +42,7 @@ def battle(character, opponent, player_goes_first):
     character['moves'] = battle_cards()
     opponent['moves'] = battle_cards()
     player_guard = character['defence']
-    enemy_guard = 0
+    enemy_guard = opponent['defence']
     if player_goes_first:
         while True:
             player_choice = player_attack(character, enemy_guard)
@@ -132,7 +132,8 @@ def enemy_attack(opponent, player_guard):
               .format(abs(enemy_guard), opponent['name']))
         return enemy_guard
     else:
-        enemy_damage = enemy_choice[1] - player_guard if enemy_choice[1] - player_guard > 0 else 0
+        enemy_damage = enemy_choice[1] + opponent['damage'] - player_guard \
+            if enemy_choice[1] + opponent['damage'] - player_guard > 0 else 0
         print('{0} dealt {1} damage to you!'.format(opponent['name'], enemy_damage), end='')
         return enemy_damage
 
