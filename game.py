@@ -31,10 +31,10 @@ def game():  # called from main
             break
         else:
             continue
-
-    # Tell the user they can’t go in that direction
-    print('better luck next time! You died')
-    # Print end of game stuff like congratulations or sorry you died
+    if achieved_goal:
+        print('Congragulations {}, you beat the game!'.format(character['name']))
+    else:
+        print('Better luck next time {}! You died.'.format(character['name']))
 
 
 def main():
