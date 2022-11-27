@@ -5,7 +5,16 @@ functions related to moving around the map
 """
 
 
-def get_user_choice(character):
+def get_user_choice(character: dict) -> dict:
+    """
+    Take user input and verify input is in range [0, 4]. Updates relevant character values upon verification.
+
+    :param character: a dictionary
+    :preconditon character: must contain key 'location X' and 'location Y'
+    :preconditon character: values must be positive integers
+    :postcondition: updates relevant character keys
+    :return: the character dictionary
+    """
     directions = ['move south', 'move east', 'move north', 'move west']
     for choice, direction in enumerate(directions, 1):
         print(choice, direction)
@@ -28,13 +37,7 @@ def get_user_choice(character):
             print('You cannot go that way')
             continue
 
-    print(character)
-    return character, True
-
-
-def validate_move(move):
-    if move:
-        return True
+    return character
 
 
 def main():
