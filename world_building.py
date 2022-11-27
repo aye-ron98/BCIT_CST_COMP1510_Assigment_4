@@ -11,8 +11,8 @@ import random
 
 def make_character():
     character_name = input('What is your name?: ')
-    character = {'name': character_name, 'hp': 100, 'xp': 0, 'level': 1, 'location X': 4, 'location Y': 0,
-                 'glow up': False, 'level cap': False, 'goal': False}
+    character = {'name': character_name, 'hp': 30, 'xp': 0, 'level': 1, 'location X': 4, 'location Y': 0,
+                 'glow up': False, 'level cap': False, 'goal': False, 'damage': 0, 'defence': 0}
     return character
 
 
