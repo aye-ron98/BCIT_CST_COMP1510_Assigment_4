@@ -48,7 +48,7 @@ def generate_scenario(player):
         answers = ['a candle', 'a human', 'a tree', 'an eraser']
 
         while True:
-            for choice, answer in enumerate(answers):
+            for choice, answer in enumerate(answers, 1):
                 print(choice, ': ', answer)
             user_input = input('\nYour answer?: ')
             if user_input == '1':
@@ -67,7 +67,7 @@ def generate_scenario(player):
         answers = ['all of them', 'february', 'december', "what's a month?"]
 
         while True:
-            for choice, answer in enumerate(answers):
+            for choice, answer in enumerate(answers, 1):
                 print(choice, ': ', answer)
             user_input = input('\nYour answer?: ')
             if user_input == '1':
@@ -110,18 +110,23 @@ def battle(character, opponent, player_goes_first):
               .format(opponent['name'], opponent['damage']))
     if player_goes_first:
         while True:
+            next_enemy_attack = opponent['moves'][randint(0, len(opponent['moves']) - 1)]
+            print('\nYou should know, {} is planning to use {} on you!'
+                  .format(opponent['name'], next_enemy_attack[0]))
             player_choice = player_attack(character, enemy_guard)
             if player_choice < 0:
                 player_guard += player_choice
             else:
                 opponent['hp'] -= player_choice
-                print('{1} is now at {0} health!'.format(opponent['hp'], opponent['name']))
                 if opponent['hp'] <= 0:
                     print('{0} has been defeated! You gain 1 xp. You are at {1} health.'
                           .format(opponent['name'], character['hp']))
                     break
-            enemy_guard = 0
-            enemy_choice = enemy_attack(opponent, player_guard)
+                else:
+                    print('{1} is now at {0} health!'.format(opponent['hp'], opponent['name']))
+
+            enemy_guard = opponent['defence']
+            enemy_choice = enemy_attack(opponent, player_guard, next_enemy_attack)
             if enemy_choice < 0:
                 enemy_guard += enemy_choice
             else:
@@ -132,8 +137,33 @@ def battle(character, opponent, player_goes_first):
                     return character
             player_guard = character['defence']
     else:
+        next_enemy_attack = opponent['moves'][randint(0, len(opponent['moves']) - 1)]
+        enemy_choice = enemy_attack(opponent, player_guard, next_enemy_attack)
+        if enemy_choice < 0:
+            enemy_guard += enemy_choice
+        else:
+            character['hp'] -= enemy_choice
+            print('You are now at {0} health!'.format(character['hp']))
+            if character['hp'] <= 0:
+                print('You are defeated')
+                return character
         while True:
-            enemy_choice = enemy_attack(opponent, player_guard)
+            next_enemy_attack = opponent['moves'][randint(0, len(opponent['moves']) - 1)]
+            print('\nYou should know, {} is planning to use {} on you!***'
+                  .format(opponent['name'], next_enemy_attack[0]))
+            player_choice = player_attack(character, enemy_guard)
+            if player_choice < 0:
+                player_guard += player_choice
+            else:
+                opponent['hp'] -= player_choice
+                if opponent['hp'] <= 0:
+                    print('{0} has been defeated! You gain 1 xp. You are at {1} health.'
+                          .format(opponent['name'], character['hp']))
+                    break
+                else:
+                    print('{1} is now at {0} health!'.format(opponent['hp'], opponent['name']))
+            enemy_guard = opponent['defence']
+            enemy_choice = enemy_attack(opponent, player_guard, next_enemy_attack)
             if enemy_choice < 0:
                 enemy_guard += enemy_choice
             else:
@@ -143,17 +173,6 @@ def battle(character, opponent, player_goes_first):
                     print('You are defeated')
                     return character
             player_guard = character['defence']
-            player_choice = player_attack(character, enemy_guard)
-            if player_choice < 0:
-                player_guard += player_choice
-            else:
-                opponent['hp'] -= player_choice
-                print('{1} is now at {0} health!'.format(opponent['hp'], opponent['name']))
-                if opponent['hp'] <= 0:
-                    print('{0} has been defeated! You gain 1 xp. You are at {1} health.'
-                          .format(opponent['name'], character['hp']))
-                    break
-            enemy_guard = 0
 
     print('\nthe battle is over! You are now at {} health'.format(character['hp']))
     character['moves'] = []
@@ -186,19 +205,17 @@ def player_attack(character, enemy_guard):
             continue
 
 
-def enemy_attack(opponent, player_guard):
-    cards_on_hand = opponent['moves']
-    enemy_choice = cards_on_hand[randint(0, len(cards_on_hand) - 1)]
-    print('{0} chose {1}!'.format(opponent['name'], enemy_choice[0]))
+def enemy_attack(opponent, player_guard, next_attack):
+    print('{0} chose {1}!'.format(opponent['name'], next_attack[0]))
 
-    if enemy_choice[1] < 0:
-        enemy_guard = enemy_choice[1]
+    if next_attack[1] < 0:
+        enemy_guard = next_attack[1]
         print('Your next attack will now do {0} less damage to {1}!'
               .format(abs(enemy_guard), opponent['name']))
         return enemy_guard
     else:
-        enemy_damage = enemy_choice[1] + opponent['damage'] - player_guard \
-            if enemy_choice[1] + opponent['damage'] - player_guard > 0 else 0
+        enemy_damage = next_attack[1] + opponent['damage'] - abs(player_guard) \
+            if next_attack[1] + opponent['damage'] - abs(player_guard) > 0 else 0
         print('{0} dealt {1} damage to you!'.format(opponent['name'], enemy_damage), end='')
         return enemy_damage
 
