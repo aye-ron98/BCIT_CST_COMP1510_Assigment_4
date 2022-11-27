@@ -41,7 +41,7 @@ def roll_initaitve():
 def battle(character, opponent, player_goes_first):
     character['moves'] = battle_cards()
     opponent['moves'] = battle_cards()
-    player_guard = 0
+    player_guard = character['defence']
     enemy_guard = 0
     if player_goes_first:
         while True:
@@ -65,7 +65,7 @@ def battle(character, opponent, player_goes_first):
                 if character['hp'] <= 0:
                     print('You are defeated')
                     return character
-            player_guard = 0
+            player_guard = character['defence']
     else:
         while True:
             enemy_choice = enemy_attack(opponent, player_guard)
@@ -77,7 +77,7 @@ def battle(character, opponent, player_goes_first):
                 if character['hp'] <= 0:
                     print('You are defeated')
                     return character
-            player_guard = 0
+            player_guard = character['defence']
             player_choice = player_attack(character, enemy_guard)
             if player_choice < 0:
                 player_guard += player_choice
@@ -112,8 +112,8 @@ def player_attack(character, enemy_guard):
                       .format(cards_on_hand[move][0], abs(player_guard)))
                 return player_guard
             else:
-                player_damage = cards_on_hand[move][1] - abs(enemy_guard) \
-                    if cards_on_hand[move][1] - abs(enemy_guard) > 0 else 0
+                player_damage = cards_on_hand[move][1] + character['damage'] - abs(enemy_guard) \
+                    if cards_on_hand[move][1] + character['damage'] - abs(enemy_guard) > 0 else 0
                 print('You chose {1} and dealt {0} damage.'.format(player_damage, cards_on_hand[move][0]), end='')
             return player_damage
         else:
