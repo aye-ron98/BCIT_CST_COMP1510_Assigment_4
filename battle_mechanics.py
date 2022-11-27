@@ -47,8 +47,8 @@ def battle(character, opponent, player_goes_first):
     if opponent['damage'] != 0 and character['level'] != 1:
         print('Watch out! {0} has been hitting the gym! All their attacks will have a +{1} effect!'
               .format(opponent['name'], opponent['damage']))
-    else:
-        print('{0 has been meditating lately, all your attacks will have a -{1} effect!}'
+    elif opponent['defence'] != 0 and character['level'] != 1:
+        print('{0} has been meditating lately, all your attacks will have a -{1} effect!'
               .format(opponent['name'], opponent['damage']))
     if player_goes_first:
         while True:
