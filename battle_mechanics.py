@@ -47,7 +47,7 @@ def execute_challenge_protocol(character: dict, board: dict) -> None:
     :precondition board: keys must be tuples of length two comprised positive integers
     :postcondition: evaluate values of board
     """
-    x_y_coordinate = (character['location X'], character['location Y'])
+    x_y_coordinate = character['location']
     if board[x_y_coordinate] == 'empty room':
         generate_scenario(character)
     if board[x_y_coordinate] == 'light challenge':
@@ -145,7 +145,7 @@ def battle(character: dict, opponent: dict, player_goes_first: bool) -> dict:
     :return: the dictionary character
     """
     character['moves'] = battle_cards()
-    opponent['moves'] = filter(remove_ultimate, battle_cards())
+    opponent['moves'] = tuple(remove_ultimate(battle_cards()))
     player_guard = character['defence']
     enemy_guard = opponent['defence']
 
@@ -223,7 +223,7 @@ def battle(character: dict, opponent: dict, player_goes_first: bool) -> dict:
             player_guard = character['defence']
 
     print('\nthe battle is over! You are now at {} health'.format(character['hp']))
-    character['moves'] = []
+    del character['moves']
     character['xp'] += 1
     return character
 
@@ -323,14 +323,14 @@ def remove_ultimate(enemy_cards: tuple) -> tuple:
     and replace with tuple ('penultimate, 12)
     :postcondition: if 'ultimate' does not exist will return enemy_cards unmodified
     :return: the tuple enemy_cards
-    >>> remove_ultimate((('ultimate', 10), ('stab', 3)))
+    >>> remove_ultimate((('stab', 3), ('ultimate', 10)))
     (('stab', 3), ('penultimate', 12))
     >>> remove_ultimate((('kick', 5), ('slap', 2), ('dodge', -5)))
     (('kick', 5), ('slap', 2), ('dodge', -5))
     """
 
-    if 'ultimate' in enemy_cards[0]:
-        enemy_attacks = dict((move, damage) for move, damage in enemy_cards if move != 'ultimate')
+    enemy_attacks = {move: damage for move, damage in enemy_cards if move != 'ultimate'}
+    if len(enemy_attacks) != len(enemy_cards):
         enemy_attacks['penultimate'] = 12
         return tuple(enemy_attacks.items())
     else:
