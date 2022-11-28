@@ -45,7 +45,7 @@ def generate_encounters() -> str:
 
     :return: string 'health, damage, defense, puzzle, riddle, or battle'
     """
-    dice_roll = random.randint(1, 6)
+    dice_roll = random.randint(6, 6)
 
     if dice_roll == 1:
         return 'health'
