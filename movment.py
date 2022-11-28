@@ -22,7 +22,8 @@ def get_user_choice(character: dict) -> dict:
 
     while True:
         move = validate_move(1, 4)
-        if exit_game(move, character):
+        exit_game(move, character)
+        if quit_game(character):
             return character
         potential_move = validate_location(int(move), directions, character)
         if 0 <= potential_move[0] <= 4 and 0 <= potential_move[1] <= 4:
@@ -122,7 +123,7 @@ def quit_game(player: dict) -> bool:
     >>> quit_game(false_dictionary)
     False
     """
-    if player['exit'] == True:
+    if player['exit']:
         return True
     else:
         return False
