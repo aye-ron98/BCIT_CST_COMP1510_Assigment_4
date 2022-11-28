@@ -80,21 +80,50 @@ def validate_location(choice: int, options: list, player: dict) -> tuple:
     return tuple(updated_coordinates)
 
 
-def exit_game(choice: str, player: dict) -> dict | bool:
+def exit_game(choice: str, player: dict) -> dict:
     """
-    End the game.
+    Evaluate choice and modify player dictionary if choice is '5'. Returns modified dictionary.
 
-    Modifies player dictionary and updates exit game flag to True. Returns a dictionary and boolean
     :param choice: a string
     :param player: a dictionary
-    :precondition player: must contain key 'exit' value must be a boolean
-    :postcondition: if choice == '5' will return plater and boolean True
-    :postcondition: if choice != '5' will return boolean False
-    :return: boolean True of False
+    :precondition player: must contain key 'exit'
+    :precondition player: key 'exit' must be boolean False
+    :postcondition: if choice == '5' will modify player['exit'] to True
+    :postcondition: if choice != '5' will return player without modifications
+    :return: the player dictionary
+    >>> yes_exit = {'exit': False}
+    >>> exit_game('5', yes_exit)
+    {'exit': True}
+    >>> no_exit = {'exit': False}
+    >>> exit_game('3', no_exit)
+    {'exit': False}
+
     """
     if choice == '5':
         player['exit'] = True
-        return player and True
+        return player
+    else:
+        return player
+
+
+def quit_game(player: dict) -> bool:
+    """
+    Evaluate player key 'exit' for boolean True or False. Will not modify player dictionary.
+
+    :param player: a dictionary
+    :precondition player: must have key 'exit' value must be bool
+    :postcondition: will return True if player['exit'] == True
+    :postcondition: will return False if player['exit'] == False
+    :return: boolean True or False
+    >>> my_dictionary = {'exit': True}
+    >>> quit_game(my_dictionary)
+    True
+    >>> false_dictionary = {'exit': False}
+    >>> quit_game(false_dictionary)
+    False
+    """
+    if player['exit'] == True:
+        return True
     else:
         return False
 
