@@ -42,7 +42,7 @@ def validate_move(lower_bound: int, upperbound: int) -> str:
     :return: user input as a string
     """
 
-    user_input = input('What is your choice?: ')
+    user_input = input('\nWhat is your choice?: ')
 
     while True:
         if str(lower_bound) <= user_input <= str(upperbound):
