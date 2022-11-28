@@ -18,7 +18,7 @@ def make_character() -> dict:
     :return: a dictionary of 11 items
     """
     character_name = input('What is your name?: ')
-    character = {'name': character_name, 'hp': 30, 'xp': 0, 'level': 1, 'location X': 4, 'location Y': 0,
+    character = {'name': character_name, 'hp': 30, 'xp': 0, 'level': 1, 'location': (4, 0),
                  'glow up': False, 'level cap': False, 'goal': False, 'damage': 0, 'defence': 0}
     return character
 
@@ -63,11 +63,10 @@ def describe_current_location(character: dict) -> None:
     :postcondition: will print a board of len(board.keys()) x len(board.keys())
     """
 
-    character_location = (character['location X'], character['location Y'])
     for x in range(0, 5):
         print('\n') if x != 0 else print(end='')
         for y in range(0, 5):
-            if (x, y) == character_location:
+            if (x, y) == character['location']:
                 print('(!)  ', end='')
             else:
                 print(' +   ', end='')
