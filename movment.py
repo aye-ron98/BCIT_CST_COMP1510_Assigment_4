@@ -16,7 +16,7 @@ def get_user_choice(character: dict) -> dict:
     :return: the character dictionary
     """
     directions = [('move north', (-1, 0)), ('move east', (0, +1)), ('move south', (+1, 0)), ('move west', (0, -1)),
-                  ('Quit')]
+                  ('Quit', '_')]
     for choice, direction in enumerate(directions, 1):
         print(choice, direction[0])
 
