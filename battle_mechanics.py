@@ -10,23 +10,23 @@ functions related to fighting
 from itertools import combinations
 from random import randint
 from movment import validate_move
+import scenarios
 import enemy
 
 
 def execute_final_boss(character: dict) -> dict:
     """
-    Change character 'complete goal' flag to true of player defeats boss.
+    Modify character dictionary.
 
     :param character: a dictionary
-    :precondition character: must have key 'achieved goal'
-    :precondition character: value must be Boolean False
-    :precondition character: must have keys 'hp', 'damage', and 'defence'
+    :precondition character: must have key 'hp', 'damage', 'defence'
     :precondition character: values must be positive integers
-    :postcondition: upon beating final boss will change 'achieved goal' value to True
+    :postcondition: will modify character values for keys 'hp', 'damage', 'defence'
     :return: an updated character dictionary
     """
-    print('What out {}, its the final boss!'
-          'To help you out you are getting a power buff, +20 health, +10 attack, +10 defense'.format(character['name']))
+    print('\nWhat out {}, its the final boss!'
+          'To help you out you are getting a power buff, +20 health, +10 attack, +10 defense\n'
+          .format(character['name']))
     character['hp'] += 20
     character['damage'] += 10
     character['defence'] += 10
@@ -43,75 +43,23 @@ def execute_challenge_protocol(character: dict, board: dict) -> None:
     Calls helper functions dependent on board and character values. Returns None
     :param character: a dictionary
     :param board: a dictionary
-    :precondition character: must contain key 'location X' and 'location Y'
-    :precondition board: keys must be tuples of length two comprised positive integers
+    :precondition character: must contain key 'location'
+    :precondition board: keys must be tuples of length two comprised of positive integers
     :postcondition: evaluate values of board
     """
     x_y_coordinate = character['location']
-    if board[x_y_coordinate] == 'empty room':
-        generate_scenario(character)
-    if board[x_y_coordinate] == 'light challenge':
+    if board[x_y_coordinate] == 'health':
+        scenarios.treasure(character)
+    if board[x_y_coordinate] == 'damage':
+        scenarios.add_health(character)
+    if board[x_y_coordinate] == 'defense':
+        scenarios.add_defense(character)
+    if board[x_y_coordinate] == 'puzzle':
+        scenarios.puzzle(character)
+    if board[x_y_coordinate] == 'riddle':
+        scenarios.riddle(character)
+    if board[x_y_coordinate] == 'battle':
         battle(character, enemy.make_enemy(character), roll_initaitve())
-
-
-def generate_scenario(player: dict) -> dict:
-    """
-    Update player values pending user input.
-
-    :param player: a dictionary
-    :precondition player: must contain key values 'hp', 'xp', 'damage', and 'defence'
-    :precondition player: values must be integers
-    :postcondition player: updates values pending user input
-    :return: dictionary player
-    """
-    scenario_number = randint(1, 5)
-
-    if scenario_number == 1:
-        treasure_picker = randint(0, 4)
-        treasures = ['stick', 'sword', 'battering ram', 'trumpet', 'flag pole']
-        print("\nIt's your luck day!, You stumble across an armory, you leave with a {0}. ALl damage is now increased "
-              "by +{1}."
-              .format(treasures[treasure_picker], treasure_picker + 3))
-        player['damage'] += treasure_picker + 3
-        return player
-    if scenario_number == 2:
-        health_gain = randint(1, 10)
-        print('\nYou come across a hospital, advertisers feed you a lot of multivitamins, you gain {} health'
-              .format(health_gain))
-        player['hp'] += health_gain
-    if scenario_number == 3:
-        defence_gain = randint(0, 4)
-        shields = ['stick shield', 'aluminum shield', 'styrofoam shield', 'imaginary shield', 'kevelar vest']
-        print('\nYou stubmle across an antique shop and leave with a {0}, all attacks are now reduced by {1}'
-              .format(shields[defence_gain], defence_gain))
-        player['defence'] += defence_gain
-    if scenario_number == 4:
-        print('\nA stander asks you:\n I’m tall when I’m young, and I’m short when I’m old. What am I?')
-        answers = ['a candle', 'a human', 'a tree', 'an eraser']
-
-        for choice, answer in enumerate(answers, 1):
-            print(choice, ': ', answer)
-        user_input = validate_move(1, 4)
-        if user_input == '1':
-            print('Correct! You gain 1xp, you are now at {0}'.format(player['xp'] + 1))
-            player['xp'] += 1
-        elif '2' <= user_input <= '4':
-            print('The right answer was a candle! You lave with nothing')
-
-    if scenario_number == 5:
-        print('\nA stander asks you:\n What month of the year has 28 days?')
-        answers = ['all of them', 'february', 'december', "what's a month?"]
-
-        for choice, answer in enumerate(answers, 1):
-            print(choice, ': ', answer)
-        user_input = validate_move(1, 4)
-        if user_input == '1':
-            print('Correct! You gain 1xp, you are now at {0}'.format(player['xp'] + 1))
-            player['xp'] += 1
-        elif '2' <= user_input <= '4':
-            print('The right answer was a all of them! You lave with nothing')
-
-    return player
 
 
 def roll_initaitve() -> bool:
