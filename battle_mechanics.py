@@ -97,12 +97,7 @@ def battle(character: dict, opponent: dict, player_goes_first: bool) -> dict:
     player_guard = character['defence']
     enemy_guard = opponent['defence']
 
-    if opponent['damage'] != 0 and character['level'] != 1:
-        print('Watch out! {0} has been hitting the gym! All their attacks will have a +{1} effect!'
-              .format(opponent['name'], opponent['damage']))
-    elif opponent['defence'] != 0 and character['level'] != 1:
-        print('{0} has been meditating lately, all your attacks will have a -{1} effect!'
-              .format(opponent['name'], opponent['damage']))
+    enemy.additional_enemy_characteristics(opponent)
     if player_goes_first:
         while True:
             next_enemy_attack = opponent['moves'][randint(0, len(opponent['moves']) - 1)]
