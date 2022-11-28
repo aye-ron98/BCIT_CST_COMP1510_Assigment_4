@@ -11,6 +11,7 @@ from itertools import combinations
 from random import randint
 import enemy
 
+
 def execute_final_boss(character: dict) -> dict:
     """
     Change character 'complete goal' flag to true of player defeats boss.
@@ -32,6 +33,7 @@ def execute_final_boss(character: dict) -> dict:
     battle(character, enemy.make_final_boss(), roll_initaitve())
 
     return character
+
 
 def execute_challenge_protocol(character: dict, board: dict) -> None:
     """
@@ -154,7 +156,7 @@ def battle(character: dict, opponent: dict, player_goes_first: bool) -> dict:
     :return: the dictionary character
     """
     character['moves'] = battle_cards()
-    opponent['moves'] = battle_cards()
+    opponent['moves'] = filter(remove_ultimate, battle_cards())
     player_guard = character['defence']
     enemy_guard = opponent['defence']
 
@@ -323,6 +325,30 @@ def battle_cards() -> tuple:
     defense_combos = list(combinations(defense.items(), 2))
 
     return attack_combos[randint(1, len(attack_combos) - 1)] + defense_combos[randint(1, len(defense_combos) - 1)]
+
+
+def remove_ultimate(enemy_cards: tuple) -> tuple:
+    """
+    Check for 'ultimate' keyword and removes it from list.
+
+    :param enemy_cards: a tuple of tuples length 2
+    :preconditon enemy_cards: nested tuples must be of (string, int) format
+    :postcondition: will modify enemy_cards, removing tuples containing 'ultimate'
+    and replace with tuple ('penultimate, 12)
+    :postcondition: if 'ultimate' does not exist will return enemy_cards unmodified
+    :return: the tuple enemy_cards
+    >>> remove_ultimate((('ultimate', 10), ('stab', 3)))
+    (('stab', 3), ('penultimate', 12))
+    >>> remove_ultimate((('kick', 5), ('slap', 2), ('dodge', -5)))
+    (('kick', 5), ('slap', 2), ('dodge', -5))
+    """
+
+    if 'ultimate' in enemy_cards[0]:
+        enemy_attacks = dict((move, damage) for move, damage in enemy_cards if move != 'ultimate')
+        enemy_attacks['penultimate'] = 12
+        return tuple(enemy_attacks.items())
+    else:
+        return enemy_cards
 
 
 def main():
