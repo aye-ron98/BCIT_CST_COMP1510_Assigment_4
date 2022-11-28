@@ -9,6 +9,7 @@ functions related to fighting
 """
 from itertools import combinations
 from random import randint
+from movment import validate_move
 import enemy
 
 
@@ -88,39 +89,27 @@ def generate_scenario(player: dict) -> dict:
         print('\nA stander asks you:\n I’m tall when I’m young, and I’m short when I’m old. What am I?')
         answers = ['a candle', 'a human', 'a tree', 'an eraser']
 
-        while True:
-            for choice, answer in enumerate(answers, 1):
-                print(choice, ': ', answer)
-            user_input = input('\nYour answer?: ')
-            if user_input == '1':
-                print('Correct! You gain 1xp, you are now at {0}'.format(player['xp'] + 1))
-                player['xp'] += 1
-                break
-            elif '2' <= user_input <= '4':
-                print('The right answer was a candle! You lave with nothing')
-                break
-            else:
-                print('that is not an option, try again')
-                continue
+        for choice, answer in enumerate(answers, 1):
+            print(choice, ': ', answer)
+        user_input = validate_move(1, 4)
+        if user_input == '1':
+            print('Correct! You gain 1xp, you are now at {0}'.format(player['xp'] + 1))
+            player['xp'] += 1
+        elif '2' <= user_input <= '4':
+            print('The right answer was a candle! You lave with nothing')
 
     if scenario_number == 5:
         print('\nA stander asks you:\n What month of the year has 28 days?')
         answers = ['all of them', 'february', 'december', "what's a month?"]
 
-        while True:
-            for choice, answer in enumerate(answers, 1):
-                print(choice, ': ', answer)
-            user_input = input('\nYour answer?: ')
-            if user_input == '1':
-                print('Correct! You gain 1xp, you are now at {0}'.format(player['xp'] + 1))
-                player['xp'] += 1
-                break
-            elif '2' <= user_input <= '4':
-                print('The right answer was a all of them! You lave with nothing')
-                break
-            else:
-                print('that is not an option, try again.')
-                continue
+        for choice, answer in enumerate(answers, 1):
+            print(choice, ': ', answer)
+        user_input = validate_move(1, 4)
+        if user_input == '1':
+            print('Correct! You gain 1xp, you are now at {0}'.format(player['xp'] + 1))
+            player['xp'] += 1
+        elif '2' <= user_input <= '4':
+            print('The right answer was a all of them! You lave with nothing')
 
     return player
 
@@ -171,6 +160,7 @@ def battle(character: dict, opponent: dict, player_goes_first: bool) -> dict:
             next_enemy_attack = opponent['moves'][randint(0, len(opponent['moves']) - 1)]
             print('\nYou should know, {} is planning to use {} on you!'
                   .format(opponent['name'], next_enemy_attack[0]))
+
             player_choice = player_attack(character, enemy_guard)
             if player_choice < 0:
                 player_guard += player_choice
@@ -251,26 +241,22 @@ def player_attack(character: dict, enemy_guard: int) -> int:
     """
     cards_on_hand = character['moves']
     print('Quickly! To battle!\n')  # start of player turn
-    while True:
-        for choice in range(0, len(cards_on_hand)):
-            print(choice + 1, cards_on_hand[choice][0])
 
-        move = int(input('what is your move?: ')) - 1
+    for choice in range(0, len(cards_on_hand)):
+        print(choice + 1, cards_on_hand[choice][0])
 
-        if 0 <= move < len(cards_on_hand):
-            if cards_on_hand[move][1] < 0:
-                player_guard = cards_on_hand[move][1]
-                print('You chose {0}, the next attack will deal {1} less damage!'
-                      .format(cards_on_hand[move][0], abs(player_guard)))
-                return player_guard
-            else:
-                player_damage = cards_on_hand[move][1] + character['damage'] - abs(enemy_guard) \
-                    if cards_on_hand[move][1] + character['damage'] - abs(enemy_guard) > 0 else 0
-                print('You chose {1} and dealt {0} damage.'.format(player_damage, cards_on_hand[move][0]), end='')
-            return player_damage
-        else:
-            print('{}, that is not a valid move!'.format(character['name']))
-            continue
+    move = int(validate_move(1, len(cards_on_hand))) - 1
+
+    if cards_on_hand[move][1] < 0:
+        player_guard = cards_on_hand[move][1]
+        print('You chose {0}, the next attack will deal {1} less damage!'
+              .format(cards_on_hand[move][0], abs(player_guard)))
+        return player_guard
+    else:
+        player_damage = cards_on_hand[move][1] + character['damage'] - abs(enemy_guard) \
+            if cards_on_hand[move][1] + character['damage'] - abs(enemy_guard) > 0 else 0
+        print('You chose {1} and dealt {0} damage.'.format(player_damage, cards_on_hand[move][0]), end='')
+    return player_damage
 
 
 def enemy_attack(opponent: dict, player_guard: int, next_attack: tuple) -> int:
