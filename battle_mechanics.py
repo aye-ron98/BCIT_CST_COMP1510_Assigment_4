@@ -145,7 +145,7 @@ def battle(character: dict, opponent: dict, player_goes_first: bool) -> dict:
     :return: the dictionary character
     """
     character['moves'] = battle_cards()
-    opponent['moves'] = tuple(remove_ultimate(battle_cards()))
+    opponent['moves'] = tuple(map(remove_ultimate, battle_cards()))
     player_guard = character['defence']
     enemy_guard = opponent['defence']
 
@@ -329,10 +329,8 @@ def remove_ultimate(enemy_cards: tuple) -> tuple:
     (('kick', 5), ('slap', 2), ('dodge', -5))
     """
 
-    enemy_attacks = {move: damage for move, damage in enemy_cards if move != 'ultimate'}
-    if len(enemy_attacks) != len(enemy_cards):
-        enemy_attacks['penultimate'] = 12
-        return tuple(enemy_attacks.items())
+    if 'ultimate' in enemy_cards[0]:
+        return 'penultimate', 10
     else:
         return enemy_cards
 
