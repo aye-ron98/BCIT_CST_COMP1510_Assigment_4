@@ -15,9 +15,9 @@ def get_user_choice(character: dict) -> dict:
     :postcondition: updates relevant character keys
     :return: the character dictionary
     """
-    directions = [('move north', (0, 1)), ('move east', (1, 0)), ('move south', (0, -1)), ('move west', (-1, 0))]
-    for choice, direction in enumerate(directions[0], 1):
-        print(choice, direction)
+    directions = [('move north', (-1, 0)), ('move east', (0, +1)), ('move south', (+1, 0)), ('move west', (0, -1))]
+    for choice, direction in enumerate(directions, 1):
+        print(choice, direction[0])
 
     while True:
         move = validate_move(1, 4)
@@ -42,13 +42,18 @@ def validate_move(lower_bound: int, upperbound: int) -> str:
     :return: user input as a string
     """
 
-    user_input = input('\nWhat is your choice?: ')
-
     while True:
-        if str(lower_bound) <= user_input <= str(upperbound):
-            return user_input
-        else:
+        try:
+            user_input = int(input('\nWhat is your choice?: \n'))
+        except ValueError:
             print('That is not an option, try again!')
+            continue
+        else:
+            if lower_bound <= user_input <= upperbound:
+                return str(user_input)
+            else:
+                print('That is not an option, try again!')
+                continue
 
 
 def validate_location(choice: int, options: list, player: dict) -> tuple:
