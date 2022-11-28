@@ -46,6 +46,23 @@ def enemy_name() -> str:
     return enemy_names[randint(1, 7)]
 
 
+def additional_enemy_characteristics(opponent: dict) -> None:
+    """
+    Validate if key 'damage' or defence' in opponent dictionary.
+
+    :param opponent: a dictionary
+    :precondition opponent: must be a dictionary
+    :postcondition: if key 'damage' in opponent will print a statement indicating so
+    :postcondition: if key 'defence' in opponent will print a statement indicating so
+    """
+    if 'damage' in opponent:
+        print('Watch out! {0} has been hitting the gym! All their attacks will have a +{1} effect!'
+              .format(opponent['name'], opponent['damage']))
+    elif 'defence' in opponent:
+        print('{0} has been meditating lately, all your attacks will have a -{1} effect!'
+              .format(opponent['name'], opponent['damage']))
+
+
 def main():
     """
     Drives the program
