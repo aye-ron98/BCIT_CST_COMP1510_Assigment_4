@@ -15,12 +15,15 @@ def get_user_choice(character: dict) -> dict:
     :postcondition: updates relevant character keys
     :return: the character dictionary
     """
-    directions = [('move north', (-1, 0)), ('move east', (0, +1)), ('move south', (+1, 0)), ('move west', (0, -1))]
+    directions = [('move north', (-1, 0)), ('move east', (0, +1)), ('move south', (+1, 0)), ('move west', (0, -1)),
+                  ('Quit')]
     for choice, direction in enumerate(directions, 1):
         print(choice, direction[0])
 
     while True:
         move = validate_move(1, 4)
+        if exit_game(move, character):
+            return character
         potential_move = validate_location(int(move), directions, character)
         if 0 <= potential_move[0] <= 4 and 0 <= potential_move[1] <= 4:
             character['location'] = potential_move
@@ -75,6 +78,25 @@ def validate_location(choice: int, options: list, player: dict) -> tuple:
     updated_coordinates = [new_coordinates + player_coordinates for
                            new_coordinates, player_coordinates in zip(new_coordinates, player_coordinates)]
     return tuple(updated_coordinates)
+
+
+def exit_game(choice: str, player: dict) -> dict | bool:
+    """
+    End the game.
+
+    Modifies player dictionary and updates exit game flag to True. Returns a dictionary and boolean
+    :param choice: a string
+    :param player: a dictionary
+    :precondition player: must contain key 'exit' value must be a boolean
+    :postcondition: if choice == '5' will return plater and boolean True
+    :postcondition: if choice != '5' will return boolean False
+    :return: boolean True of False
+    """
+    if choice == '5':
+        player['exit'] = True
+        return player and True
+    else:
+        return False
 
 
 def main():
