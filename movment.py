@@ -21,9 +21,9 @@ def get_user_choice(character: dict) -> dict:
         print(choice, direction[0])
 
     while True:
-        move = validate_move(1, 4)
+        move = validate_move(1, 5)
         exit_game(move, character)
-        if quit_game(character):
+        if character['exit']:
             return character
         potential_move = validate_location(int(move), directions, character)
         if 0 <= potential_move[0] <= 4 and 0 <= potential_move[1] <= 4:
@@ -105,28 +105,6 @@ def exit_game(choice: str, player: dict) -> dict:
         return player
     else:
         return player
-
-
-def quit_game(player: dict) -> bool:
-    """
-    Evaluate player key 'exit' for boolean True or False. Will not modify player dictionary.
-
-    :param player: a dictionary
-    :precondition player: must have key 'exit' value must be bool
-    :postcondition: will return True if player['exit'] == True
-    :postcondition: will return False if player['exit'] == False
-    :return: boolean True or False
-    >>> my_dictionary = {'exit': True}
-    >>> quit_game(my_dictionary)
-    True
-    >>> false_dictionary = {'exit': False}
-    >>> quit_game(false_dictionary)
-    False
-    """
-    if player['exit']:
-        return True
-    else:
-        return False
 
 
 def main():

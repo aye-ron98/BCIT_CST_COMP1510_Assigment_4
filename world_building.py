@@ -18,7 +18,7 @@ def make_character() -> dict:
     :return: a dictionary of 11 items
     """
     character_name = input('What is your name?: ')
-    character = {'name': character_name, 'hp': 30, 'xp': 0, 'level': 1, 'location': (4, 0),
+    character = {'name': character_name, 'hp': 30, 'xp': 0, 'level': 1, 'location': (4, 0), 'exit': False,
                  'glow up': False, 'level cap': False, 'goal': False, 'damage': 0, 'defence': 0}
     return character
 
