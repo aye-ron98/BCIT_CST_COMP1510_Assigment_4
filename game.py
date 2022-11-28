@@ -19,6 +19,8 @@ def game():  # called from main
         world_building.describe_current_location(character)
         movment.get_user_choice(character)
         world_building.describe_current_location(character)
+        if character['exit']:
+            break
         battle_mechanics.execute_challenge_protocol(character, board)
         if character_condition.character_has_leveled(character):
             character_condition.execute_glow_up_protocol(character)
@@ -33,6 +35,8 @@ def game():  # called from main
             continue
     if achieved_goal:
         print('Congragulations {}, you beat the game!'.format(character['name']))
+    elif character['exit']:
+        print('So sad to see you go {}, come play again!'.format(character['name']))
     else:
         print('Better luck next time {}! You died.'.format(character['name']))
 
