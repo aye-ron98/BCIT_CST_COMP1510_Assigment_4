@@ -28,7 +28,7 @@ def make_enemy(character: dict) -> dict:
     :postcondition: will generate enemy dictionary of length 3 or 4
     :return: a dictionary of length 3 or 4
     """
-    enemy = {'name': enemy_name(), 'moves': [],
+    enemy = {'name': enemy_name(),
              'hp': character['hp'] // 2.5 if character['level'] == 1 else 35,
              'damage': 0 if character['level'] == 1 else randint(0, character['hp'] // 5)}
     enemy['defence'] = 0 if character['level'] == 1 or enemy['damage'] != 0 else randint(1, character['hp'] // 5)
