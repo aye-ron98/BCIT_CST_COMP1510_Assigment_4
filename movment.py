@@ -5,14 +5,15 @@ functions related to moving around the map
 """
 
 
-def get_user_choice(character: dict) -> dict:
+def get_user_choice(player: dict) -> dict:
     """
-    Take user input modifies character 'location' key.
+    Take user input modifies character dictionary.
 
-    :param character: a dictionary
-    :preconditon character: must contain key 'location'
-    :preconditon character: values must be positive integers
-    :postcondition: updates relevant character keys
+    :param player: a dictionary
+    :preconditon character: must contain key 'location' and 'exit'
+    :precondition character: location value must tuple length 2 comprised of integer data type
+    :precondition character: 'exit' key must be boolean value False
+    :postcondition: modifies and returns player dictionary
     :return: the character dictionary
     """
     directions = [('move north', (-1, 0)), ('move east', (0, +1)), ('move south', (+1, 0)), ('move west', (0, -1)),
@@ -22,23 +23,22 @@ def get_user_choice(character: dict) -> dict:
 
     while True:
         move = validate_move(1, 5)
-        exit_game(move, character)
-        if character['exit']:
-            return character
-        potential_move = validate_location(int(move), directions, character)
+        exit_game(move, player)
+        if player['exit']:
+            return player
+        potential_move = validate_location(int(move), directions, player)
         if 0 <= potential_move[0] <= 4 and 0 <= potential_move[1] <= 4:
-            character['location'] = potential_move
-            return character
+            player['location'] = potential_move
+            return player
         else:
-            print('{} you cannot go that way'.format(character['name']))
+            print('{} you cannot go that way'.format(player['name']))
 
 
 def validate_move(lower_bound: int, upperbound: int) -> str:
     """
-    Takes user input and validates it is within the range of upper and lower bound. Asks user to try again if input is
-    not in a valid range.
+    Takes user input and validates it is within the range of upper and lower bound before retuning it.
+    Asks user to try again if input is not in a valid range. Will convert upper and lower bound to string.
 
-    Converts upper and lower bound to string
     :param lower_bound: an integer
     :param upper upperbound: an integer
     :precondition upperbound: must be greater than lower bound
@@ -67,12 +67,15 @@ def validate_location(choice: int, options: list, player: dict) -> tuple:
     :param choice: a nonzero positive integer
     :param options: a list of length 2
     :param player: a dictionary
-    :precondition options: second item in lost must be tuple of length 2, contents must be integers
+    :preconditon choice: must be within range [0 , len(options)]
+    :precondition options: second item must be tuple of length 2, contents must be integers
     :precondition player: must contain key 'location' value must be tuple of length 2, contents must be integers
     :postcondition: will sum individual values two tuples together
     :return: a tuple length 2
-    >>> validate_location(1, [('move south', (0, -1))], {'location': (3, 4)})
+    >>> validate_location(1, [('move south', (0, -1)), ('move north', (1, 0))], {'location': (3, 4)})
     (3, 3)
+    >>> validate_location(2, [('move south', (0, -1)), ('move north', (1, 0))], {'location': (3, 4)})
+    (4, 4)
     """
     new_coordinates = options[choice - 1][1]
     player_coordinates = player['location']
