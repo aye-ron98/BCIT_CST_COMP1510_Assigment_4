@@ -14,10 +14,17 @@ def make_character() -> dict:
     Make a character dictionary
 
     :precondition: user must enter a character name
+    :precondition: user input cannot be string length 0
     :postcondition: will construct a dictionary representing game character
+    :postcondition: character name key will be set to user input
     :return: a dictionary of 11 items
     """
-    character_name = input('What is your name?: ')
+    while True:
+        character_name = input('What is your name?: ')
+        if character_name == '':
+            print('That is not a name!')
+        else:
+            break
     character = {'name': character_name, 'hp': 30, 'xp': 0, 'level': 1, 'location': (4, 0), 'exit': False,
                  'glow up': False, 'level cap': False, 'goal': False, 'damage': 0, 'defence': 0}
     return character
