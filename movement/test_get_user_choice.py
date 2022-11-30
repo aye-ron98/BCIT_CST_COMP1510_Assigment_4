@@ -103,3 +103,4 @@ class TestGetUserChoice(TestCase):
                           "4 move west\n" \
                           "5 Quit\n"
         self.assertEqual({'location': (3, 4), 'exit': False, 'name': 'jerry'}, actual)
+        self.assertEqual(expected_output, the_game_printed_this)
