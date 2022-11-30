@@ -21,13 +21,14 @@ def make_character() -> dict:
     """
     while True:
         character_name = input('What is your name?: ')
-        if character_name == '':
-            print('That is not a name!')
+        if character_name != '':
+            character = {'name': character_name, 'hp': 30, 'xp': 0, 'level': 1, 'location': (4, 0), 'exit': False,
+                         'glow up': False, 'level cap': False, 'goal': False, 'damage': 0, 'defence': 0}
+            return character
         else:
-            break
-    character = {'name': character_name, 'hp': 30, 'xp': 0, 'level': 1, 'location': (4, 0), 'exit': False,
-                 'glow up': False, 'level cap': False, 'goal': False, 'damage': 0, 'defence': 0}
-    return character
+            print('That is not a name!')
+            continue
+
 
 
 def make_board(rows: int, columns: int) -> dict:
