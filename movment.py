@@ -5,10 +5,13 @@ functions related to moving around the map
 """
 
 
-def print_choices(options):
+def print_choices(options: list) -> None:
     """
     Print user choices in a listed number option
 
+    :param options: must be a list of tuples
+    :precondition options: tuples must be length 2 consisting of iterable objects
+    :postcondition: will print an enumerated list of options
     """
     for choice, direction in enumerate(options, 1):
         print(choice, direction[0])
