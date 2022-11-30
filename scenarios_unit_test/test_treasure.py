@@ -2,7 +2,6 @@ from unittest import TestCase
 from unittest.mock import patch
 from scenarios import treasure
 import io
-from random import randint
 
 
 class TestTreasure(TestCase):
