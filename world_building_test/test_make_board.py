@@ -1,6 +1,5 @@
 from unittest import TestCase
 from world_building import make_board
-from unittest.mock import patch
 
 
 class TestMakeBoard(TestCase):
