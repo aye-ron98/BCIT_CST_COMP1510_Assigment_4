@@ -3,7 +3,7 @@ scenarios.py
 
 functions that relate to non battle scenarios the players can experience.
 """
-from random import randint
+import random
 import movment
 
 
@@ -17,11 +17,11 @@ def treasure(player: dict) -> dict:
     :postcondition: increments 'damage' key equivalent to randomly picked number in range [3, 7]
     :return: the player dictionary
     """
-    treasure_picker = randint(0, 4)
+    treasure_picker = random.randint(0, 4)
     treasures = ['stick', 'sword', 'battering ram', 'trumpet', 'flag pole']
     print("\nIt's your luck day!, You stumble across an armory, you leave with a {0}. ALl damage is now increased "
           "by +{1}."
-          .format(treasures[treasure_picker], treasure_picker + 3))
+          .format(treasures[treasure_picker], (treasure_picker + 3)))
     player['damage'] += treasure_picker + 3
 
     return player
@@ -37,7 +37,7 @@ def add_health(player: dict) -> dict:
     :postcondition: increments 'hp' key equivalent to randomly picked number in range [1, 10]
     :return: the player dictionary
     """
-    health_gain = randint(1, 10)
+    health_gain = random.randint(1, 10)
     print('\nYou come across a hospital, advertisers feed you a lot of multivitamins, you gain {} health'
           .format(health_gain))
     player['hp'] += health_gain
@@ -55,7 +55,7 @@ def add_defense(player: dict) -> dict:
     :postcondition: increments 'defence' key equivalent to randomly picked number in range [0, 4]
     :return: the player dictionary
     """
-    defence_gain = randint(0, 4)
+    defence_gain = random.randint(0, 4)
     shields = ['stick shield', 'aluminum shield', 'styrofoam shield', 'imaginary shield', 'kevelar vest']
     print('\nYou stubmle across an antique shop and leave with a {0}, all attacks are now reduced by {1}'
           .format(shields[defence_gain], defence_gain))
