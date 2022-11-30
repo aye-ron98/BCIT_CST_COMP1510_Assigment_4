@@ -75,7 +75,9 @@ def describe_current_location(character: dict) -> None:
     :param character: a dictionary
     :precondition character: must contain key 'location' as a tuple of length 2 contents are positive integers
     :precondition character: tuple integers must be in rage [0, 5]
-    :postcondition: will print a board of len(board.keys()) x len(board.keys())
+    :postconidtion: where 'location' == current range iteration, '(!) ' will be printed
+    :postconsition: where 'location' != current range iteration, ' +  ' will be printed
+    :postcondition: will print a board of 5 x 5 size
     """
 
     for x in range(0, 5):
