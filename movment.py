@@ -5,6 +5,15 @@ functions related to moving around the map
 """
 
 
+def print_choices(options):
+    """
+    Print user choices in a listed number option
+
+    """
+    for choice, direction in enumerate(options, 1):
+        print(choice, direction[0])
+
+
 def get_user_choice(player: dict) -> dict:
     """
     Take user input modifies character dictionary.
@@ -18,8 +27,7 @@ def get_user_choice(player: dict) -> dict:
     """
     directions = [('move north', (-1, 0)), ('move east', (0, +1)), ('move south', (+1, 0)), ('move west', (0, -1)),
                   ('Quit', '_')]
-    for choice, direction in enumerate(directions, 1):
-        print(choice, direction[0])
+    print_choices(directions)
 
     while True:
         move = validate_move(1, 5)
