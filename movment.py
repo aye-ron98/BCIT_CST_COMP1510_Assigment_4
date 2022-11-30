@@ -5,24 +5,6 @@ functions related to moving around the map
 """
 
 
-def print_choices(options: list) -> None:
-    """
-    Print user choices in a listed number option. Will not modify contents of options
-
-    :param options: must be a list of tuples
-    :precondition options: tuples must be length 2 consisting of iterable objects
-    :precondition options: list must be min length one
-    :postcondition: will print an enumerated list of options
-    >>> print_choices([('south', 1), ('north', 'ten')])
-    1 south
-    2 north
-    >>> print_choices([('north', 7)])
-    1 north
-    """
-    for choice, direction in enumerate(options, 1):
-        print(choice, direction[0])
-
-
 def get_user_choice(player: dict) -> dict:
     """
     Take user input modifies character dictionary.
@@ -36,7 +18,8 @@ def get_user_choice(player: dict) -> dict:
     """
     directions = [('move north', (-1, 0)), ('move east', (0, +1)), ('move south', (+1, 0)), ('move west', (0, -1)),
                   ('Quit', '_')]
-    print_choices(directions)
+    for choice, direction in enumerate(directions, 1):
+        print(choice, direction[0])
 
     while True:
         move = validate_move(1, 5)
