@@ -81,8 +81,8 @@ def puzzle(player: dict) -> dict:
         print(choice, ': ', answer)
     user_input = movment.validate_move(1, 4)
     if user_input == '1':
-        print('Correct! You gain 1xp, you are now at {0}'.format(player['xp'] + 1))
         player['xp'] += 1
+        print('Correct! You gain 1xp, you are now at {0}'.format(player['xp']))
         return player
     elif '2' <= user_input <= '4':
         print('The right answer was a candle! You lave with nothing')
