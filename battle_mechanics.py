@@ -71,10 +71,10 @@ def roll_initaitve() -> bool:
     coin_flip = random.randint(1, 2)
 
     if coin_flip == 1:
-        print('\nYou are lucky today, you will attack first!\n')
+        print('\nYou are lucky today, you will attack first!')
         return True
-    else:
-        print('\nnot so lucky, your enemy will attack first!\n')
+    elif coin_flip == 2:
+        print('\nnot so lucky, your enemy will attack first!')
         return False
 
 
