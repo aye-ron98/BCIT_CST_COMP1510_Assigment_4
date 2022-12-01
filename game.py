@@ -24,7 +24,6 @@ def game():  # called from main
         battle_mechanics.execute_challenge_protocol(character, board)
         if character_condition.character_has_leveled(character):
             character_condition.execute_glow_up_protocol(character)
-            # achieved_goal = check_if_goal_attained(character)
         if character['level cap']:
             battle_mechanics.execute_final_boss(character)
             if character['hp'] > 0:
@@ -34,7 +33,7 @@ def game():  # called from main
         else:
             continue
     if achieved_goal:
-        print('Congragulations {}, you beat the game!'.format(character['name']))
+        print('Congratulations {}, you beat the game!'.format(character['name']))
     elif character['exit']:
         print('So sad to see you go {}, come play again!'.format(character['name']))
     else:
