@@ -261,16 +261,15 @@ def remove_ultimate(enemy_cards: tuple) -> tuple:
     """
     Check for 'ultimate' keyword and removes it from list.
 
-    :param enemy_cards: a tuple of tuples length 2
-    :preconditon enemy_cards: nested tuples must be of (string, int) format
-    :postcondition: will modify enemy_cards, removing tuples containing 'ultimate'
-    and replace with tuple ('penultimate, 12)
+    :param enemy_cards: a tuple of length 2
+    :preconditon enemy_cards: must be of (string, int) format
+    :postcondition: will modify enemy_cards, removing tuple 'ultimate',and  replace with tuple ('penultimate, 10)
     :postcondition: if 'ultimate' does not exist will return enemy_cards unmodified
     :return: the tuple enemy_cards
-    >>> remove_ultimate((('stab', 3), ('ultimate', 10)))
-    (('stab', 3), ('penultimate', 12))
-    >>> remove_ultimate((('kick', 5), ('slap', 2), ('dodge', -5)))
-    (('kick', 5), ('slap', 2), ('dodge', -5))
+    >>> remove_ultimate(('ultimate', 10))
+    ('penultimate', 10)
+    >>> remove_ultimate(('kick', 5))
+    ('kick', 5)
     """
 
     if 'ultimate' in enemy_cards[0]:
