@@ -60,7 +60,7 @@ def additional_enemy_characteristics(opponent: dict) -> None:
               .format(opponent['name'], opponent['damage']))
     elif opponent['defence'] > 0:
         print('{0} has been meditating lately, all your attacks will have a -{1} effect!'
-              .format(opponent['name'], opponent['damage']))
+              .format(opponent['name'], opponent['defence']))
 
 
 def main():
