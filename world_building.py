@@ -30,7 +30,6 @@ def make_character() -> dict:
             continue
 
 
-
 def make_board(rows: int, columns: int) -> dict:
     """
     Create a board for size rows x columns.
