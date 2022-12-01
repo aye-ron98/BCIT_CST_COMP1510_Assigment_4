@@ -13,7 +13,7 @@ class TestBattle(TestCase):
     @patch('enemy.additional_enemy_characteristics', side_effect=None)
     @patch('battle_mechanics.player_attack', return_value=100)
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_battle_player_win(self, mock_print, mock_attack, mock_characteristics, mock_roll, mock_enemy, mock_player):
+    def test_battle_player_win(self, mock_print, _, __, ___, ____, _____):
         actual = battle({'hp': 100, 'defence': 5, 'damage': 100, 'xp': 1},
                         {'hp': 10, 'defence': 0, 'damage': 2, 'name': 'bob'}, True)
         expected = '\nYou should know, bob is planning to use stand on you!\n' \
@@ -28,7 +28,7 @@ class TestBattle(TestCase):
     @patch('enemy.additional_enemy_characteristics', side_effect=None)
     @patch('battle_mechanics.enemy_attack', return_value=100)
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_battle_player_loose(self, mock_print, mock_attack, mock_characteristics, mock_enemy, mock_player):
+    def test_battle_player_loose(self, mock_print, _, __, ___, ____):
         actual = battle({'hp': 100, 'defence': 0, 'damage': 100, 'xp': 1},
                         {'hp': 10, 'defence': 0, 'damage': 2, 'name': 'bob'}, False)
         expected = 'You are now at 0 health!\nYou are defeated\n'
