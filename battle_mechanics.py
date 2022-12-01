@@ -8,7 +8,7 @@ functions related to fighting
 - damage
 """
 from itertools import combinations
-from random import randint
+import random
 from movment import validate_move
 import scenarios
 import enemy
@@ -68,7 +68,7 @@ def roll_initaitve() -> bool:
 
     :return: boolean True or False
     """
-    coin_flip = randint(1, 2)
+    coin_flip = random.randint(1, 2)
 
     if coin_flip == 1:
         print('\nYou are lucky today, you will attack first!\n')
@@ -100,7 +100,7 @@ def battle(character: dict, opponent: dict, player_goes_first: bool) -> dict:
     enemy.additional_enemy_characteristics(opponent)
     if player_goes_first:
         while True:
-            next_enemy_attack = opponent['moves'][randint(0, len(opponent['moves']) - 1)]
+            next_enemy_attack = opponent['moves'][random.randint(0, len(opponent['moves']) - 1)]
             print('\nYou should know, {} is planning to use {} on you!'
                   .format(opponent['name'], next_enemy_attack[0]))
 
@@ -128,7 +128,7 @@ def battle(character: dict, opponent: dict, player_goes_first: bool) -> dict:
                     return character
             player_guard = character['defence']
     else:
-        next_enemy_attack = opponent['moves'][randint(0, len(opponent['moves']) - 1)]
+        next_enemy_attack = opponent['moves'][random.randint(0, len(opponent['moves']) - 1)]
         enemy_choice = enemy_attack(opponent, player_guard, next_enemy_attack)
         if enemy_choice < 0:
             enemy_guard += enemy_choice
@@ -139,7 +139,7 @@ def battle(character: dict, opponent: dict, player_goes_first: bool) -> dict:
                 print('You are defeated')
                 return character
         while True:
-            next_enemy_attack = opponent['moves'][randint(0, len(opponent['moves']) - 1)]
+            next_enemy_attack = opponent['moves'][random.randint(0, len(opponent['moves']) - 1)]
             print('\nYou should know, {} is planning to use {} on you!***'
                   .format(opponent['name'], next_enemy_attack[0]))
             player_choice = player_attack(character, enemy_guard)
@@ -253,7 +253,8 @@ def battle_cards() -> tuple:
     attack_combos = list(combinations(attacks.items(), 3))
     defense_combos = list(combinations(defense.items(), 2))
 
-    return attack_combos[randint(1, len(attack_combos) - 1)] + defense_combos[randint(1, len(defense_combos) - 1)]
+    return attack_combos[random.randint(1, len(attack_combos) - 1)] +\
+           defense_combos[random.randint(1, len(defense_combos) - 1)]
 
 
 def remove_ultimate(enemy_cards: tuple) -> tuple:
