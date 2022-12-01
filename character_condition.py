@@ -29,16 +29,16 @@ def character_has_leveled(character: dict) -> dict:
             character['level'] = 2
             character['xp'] = 0
             character['hp'] = 50
-            character['defence'] = 10
-            character['damage'] = 10
+            character['defence'] += 10
+            character['damage'] += 10
             character['glow up'] = True
     elif character['level'] == 2:
         if character['xp'] == 5:
             character['level'] = 3
             character['xp'] = 0
             character['hp'] = 100
-            character['defence'] = 25
-            character['damage'] = 25
+            character['defence'] += 25
+            character['damage'] += 25
             character['glow up'] = True
             character['level cap'] = True
 
