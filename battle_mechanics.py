@@ -25,15 +25,15 @@ def execute_final_boss(character: dict) -> dict:
     :return: an updated character dictionary
     """
     print('\nWhat out {}, its the final boss!'
-          'To help you out you are getting a power buff, +20 health, +10 attack, +10 defense\n'
+          'To help you out you are getting a power buff, +20 health, +10 attack, +10 defense'
           .format(character['name']))
     character['hp'] += 20
     character['damage'] += 10
     character['defence'] += 10
 
-    battle(character, enemy.make_final_boss(), roll_initaitve())
+    after_the_battle = battle(character, enemy.make_final_boss(), roll_initaitve())
 
-    return character
+    return after_the_battle
 
 
 def execute_challenge_protocol(character: dict, board: dict) -> None:
