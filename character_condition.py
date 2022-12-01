@@ -17,12 +17,12 @@ def character_has_leveled(character: dict) -> dict:
     :precondition character: must contain keys 'level', 'xp', 'hp', glow up'
     :precondition character: values must be integer
     :return: an updated dictionary character
-    >>> character = {'level': 1, 'xp': 3, 'hp': 30, 'defence': 0, 'damage': 0, 'glow up': False}
-    >>> character_has_leveled(character)
+    >>> my_character = {'level': 1, 'xp': 3, 'hp': 30, 'defence': 0, 'damage': 0, 'glow up': False}
+    >>> character_has_leveled(my_character)
     {'level': 2, 'xp': 0, 'hp': 50, 'defence': 10, 'damage': 10, 'glow up': True}
     >>> character_level_2 = {'level': 2, 'xp': 3, 'hp': 10, 'defence': 0, 'damage': 0, 'glow up': False}
-    >>> character_has_leveled(character)
-    {'level': 2, 'xp': 0, 'hp': 50, 'defence': 10, 'damage': 10, 'glow up': True}
+    >>> character_has_leveled(character_level_2)
+    {'level': 2, 'xp': 3, 'hp': 10, 'defence': 0, 'damage': 0, 'glow up': False}
     """
     if character['level'] == 1:
         if character['xp'] == 3:
@@ -54,8 +54,8 @@ def character_health(character: dict) -> bool:
     :precondition character: must contain key 'hp'
     :postcondition: will return True or False
     :return: a boolean True or False
-    >>> character = {'hp': 0}
-    >>> character_health(character)
+    >>> my_character = {'hp': 0}
+    >>> character_health(my_character)
     True
     >>> healthy_character = {'hp': 10}
     >>> character_health(healthy_character)
