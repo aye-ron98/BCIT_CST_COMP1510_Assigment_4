@@ -54,6 +54,12 @@ def additional_enemy_characteristics(opponent: dict) -> None:
     :precondition opponent: must be a dictionary
     :postcondition: if key 'damage' in opponent > 0 will print a statement indicating so
     :postcondition: if key 'defence' in opponent > 0 will print a statement indicating so
+    >>> additional_enemy_characteristics({'damage': 1, 'defence': 0, 'name': 'bob'})
+    Watch out! bob has been hitting the gym! All their attacks will have a +1 effect!
+    >>> additional_enemy_characteristics({'damage': 0, 'defence': 1, 'name': 'bob'})
+    bob has been meditating lately, all your attacks will have a -1 effect!
+    >>> additional_enemy_characteristics({'damage': 0, 'defence': 0, 'name': 'bob'})
+
     """
     if opponent['damage'] > 0:
         print('Watch out! {0} has been hitting the gym! All their attacks will have a +{1} effect!'
