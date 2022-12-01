@@ -9,7 +9,7 @@ functions related to fighting
 """
 from itertools import combinations
 import random
-from movment import validate_move
+import movment
 import scenarios
 import enemy
 
@@ -188,7 +188,7 @@ def player_attack(character: dict, enemy_guard: int) -> int:
     for choice in range(0, len(cards_on_hand)):
         print(choice + 1, cards_on_hand[choice][0])
 
-    move = int(validate_move(1, len(cards_on_hand))) - 1
+    move = int(movment.validate_move(1, len(cards_on_hand))) - 1
 
     if cards_on_hand[move][1] < 0:
         player_guard = cards_on_hand[move][1]
@@ -253,8 +253,8 @@ def battle_cards() -> tuple:
     attack_combos = list(combinations(attacks.items(), 3))
     defense_combos = list(combinations(defense.items(), 2))
 
-    return attack_combos[random.randint(1, len(attack_combos) - 1)] +\
-           defense_combos[random.randint(1, len(defense_combos) - 1)]
+    return attack_combos[random.randint(1, len(attack_combos) - 1)] \
+        + defense_combos[random.randint(1, len(defense_combos) - 1)]
 
 
 def remove_ultimate(enemy_cards: tuple) -> tuple:
