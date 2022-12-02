@@ -9,7 +9,7 @@ import movment
 
 def treasure(player: dict) -> dict:
     """
-    Modify player dictionary with a randomly selected number.
+    Modify player dictionary positively with a randomly selected number.
 
     :param player: a dictionary
     :precondition player: must have key 'damage'

@@ -9,6 +9,7 @@ def get_user_choice(player: dict) -> dict:
     """
     Take user input modifies character dictionary.
 
+    Prints an enumerated list of options for user to choose from.
     :param player: a dictionary
     :preconditon character: must contain key 'location' and 'exit'
     :precondition character: location value must tuple length 2 comprised of integer data type

@@ -80,8 +80,9 @@ def roll_initaitve() -> bool:
 
 def battle(character: dict, opponent: dict, player_goes_first: bool) -> dict:
     """
-    Updates character dictionary pending user input.
+    Game battle function, simulates a battle.
 
+    Updates character dictionary pending user input.
     :param character: a dictionary
     :param opponent: a dictionary
     :param player_goes_first: boolean True or False
@@ -204,7 +205,7 @@ def player_attack(character: dict, enemy_guard: int) -> int:
 
 def enemy_attack(opponent: dict, player_guard: int, next_attack: tuple) -> int:
     """
-    Calculate an integer to return pending values of character and enemy_guard
+    Calculate an integer to return pending values of character and enemy_guard. Prints calculated integer to screen.
 
     :param opponent: a dictionary
     :param player_guard: a positive integer
