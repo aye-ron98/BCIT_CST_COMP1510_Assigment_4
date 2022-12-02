@@ -7,11 +7,11 @@ import io
 class TestValidateMove(TestCase):
 
     @patch('builtins.input', side_effect=[1])
-    def test_validate_move_lower_bound(self, mock_input):
+    def test_validate_move_lower_bound(self, _):
         self.assertEqual(str(1), validate_move(1, 5))
 
     @patch('builtins.input', side_effect=[5])
-    def test_validate_move_upper_bound(self, mock_input):
+    def test_validate_move_upper_bound(self, _):
         self.assertEqual(str(5), validate_move(1, 5))
 
     @patch('builtins.input', side_effect=[6, 1])
