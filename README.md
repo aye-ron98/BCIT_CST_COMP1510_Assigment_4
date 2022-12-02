@@ -12,16 +12,16 @@ Comments:
 None for now.
 
 
-| Required Element         | module (line)                  |
-|:-------------------------|:-------------------------------|
-| Tuple                    | world_building (38)            |
-| List                     | scenarios (21)                 |
-| dictionary comprehension | world_building (38)            |
-| selection (if)           | battle_mechanice (198)         |
-| repetition (while)       | movement (49)                  |
-| in operator              | battle_mechanice (280)         |
-| range                    | describe_current_location (73) |
-| itertools                | battle_mechanics (258)         | 
-| enumerate                | movement (21)                  |
-| map                      | battle_mechanics (96)          |
-| random                   | scenarios (20)                 |
+| Required Element         | module (line)          |
+|:-------------------------|:-----------------------|
+| Tuple                    | world_building (45)    |
+| List                     | scenarios (21)         |
+| dictionary comprehension | world_building (45)    |
+| selection (if)           | battle_mechanics (240) |
+| repetition (while)       | movement (49)          |
+| in operator              | battle_mechanics (275) |
+| range                    | world_building (83)    |
+| itertools                | battle_mechanics (253) | 
+| enumerate                | movement (21)          |
+| map                      | battle_mechanics (96)  |
+| random                   | scenarios (20)         |
