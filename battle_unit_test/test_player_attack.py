@@ -8,7 +8,7 @@ class TestPlayerAttack(TestCase):
 
     @patch('movment.validate_move', return_value='1')
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_enemy_attack(self, mock_print, mock_input):
+    def test_enemy_attack(self, mock_print, _):
         actual = player_attack({'hp': 10, 'damage': 5, 'defence': 0, 'moves': (('kick', 5), ('push', 2))}, -5)
         the_game_printed_this = mock_print.getvalue()
         expected_output = "Quickly! To battle!\n" \
@@ -20,7 +20,7 @@ class TestPlayerAttack(TestCase):
 
     @patch('movment.validate_move', return_value='1')
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_enemy_attack_player_10_damage(self, mock_print, mock_input):
+    def test_enemy_attack_player_10_damage(self, mock_print, _):
         actual = player_attack({'hp': 10, 'damage': 5, 'defence': 0, 'moves': (('kick', 10), ('push', 2))}, -5)
         the_game_printed_this = mock_print.getvalue()
         expected_output = "Quickly! To battle!\n" \
@@ -32,7 +32,7 @@ class TestPlayerAttack(TestCase):
 
     @patch('movment.validate_move', return_value='2')
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_enemy_attack_player_0_damage(self, mock_print, mock_input):
+    def test_enemy_attack_player_0_damage(self, mock_print, _):
         actual = player_attack({'hp': 10, 'damage': 5, 'defence': 0, 'moves': (('kick', 5), ('push', 2))}, -10)
         the_game_printed_this = mock_print.getvalue()
         expected_output = "Quickly! To battle!\n" \
@@ -44,7 +44,7 @@ class TestPlayerAttack(TestCase):
 
     @patch('movment.validate_move', return_value='2')
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_enemy_attack_player_guard(self, mock_print, mock_input):
+    def test_enemy_attack_player_guard(self, mock_print, _):
         actual = player_attack({'hp': 10, 'damage': 5, 'defence': 0, 'moves': (('kick', 5), ('guard', -2))}, -10)
         the_game_printed_this = mock_print.getvalue()
         expected_output = "Quickly! To battle!\n" \
