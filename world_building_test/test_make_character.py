@@ -7,13 +7,13 @@ from world_building import make_character
 class TestMakeCharacter(TestCase):
 
     @patch('builtins.input', side_effect=['tommy'])
-    def test_make_character(self, mock_input):
+    def test_make_character(self, _):
         self.assertEqual({'damage': 0, 'defence': 0, 'exit': False, 'glow up': False, 'goal': False, 'hp': 30,
                           'level': 1, 'level cap': False, 'location': (4, 0), 'name': 'tommy', 'xp': 0},
                          make_character())
 
     @patch('builtins.input', side_effect=['A01280188'])
-    def test_make_character_student_number(self, mock_input):
+    def test_make_character_student_number(self, _):
         self.assertEqual({'damage': 0, 'defence': 0, 'exit': False, 'glow up': False, 'goal': False, 'hp': 30,
                           'level': 1, 'level cap': False, 'location': (4, 0), 'name': 'A01280188', 'xp': 0},
                          make_character())
