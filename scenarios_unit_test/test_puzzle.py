@@ -8,7 +8,7 @@ class TestPuzzle(TestCase):
 
     @patch('builtins.input', side_effect='1')
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_puzzle(self, mock_print, mock_input):
+    def test_puzzle(self, mock_print, _):
         actual = puzzle({'xp': 0})
         the_game_printed_this = mock_print.getvalue()
         expected_output = "\nA stander asks you:\n I’m tall when I’m young, and I’m short when I’m old. What am I?" \
@@ -19,7 +19,7 @@ class TestPuzzle(TestCase):
 
     @patch('builtins.input', side_effect='2')
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_user_guess_wrong_puzzle_lower_limit(self, mock_print, mock_input):
+    def test_user_guess_wrong_puzzle_lower_limit(self, mock_print, _):
         actual = puzzle({'xp': 0})
         the_game_printed_this = mock_print.getvalue()
         expected_output = "\nA stander asks you:\n I’m tall when I’m young, and I’m short when I’m old. What am I?" \
@@ -30,7 +30,7 @@ class TestPuzzle(TestCase):
 
     @patch('builtins.input', side_effect='4')
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_user_guess_wrong_puzzle_upper_limit(self, mock_print, mock_input):
+    def test_user_guess_wrong_puzzle_upper_limit(self, mock_print, _):
         actual = puzzle({'xp': 0})
         the_game_printed_this = mock_print.getvalue()
         expected_output = "\nA stander asks you:\n I’m tall when I’m young, and I’m short when I’m old. What am I?" \
