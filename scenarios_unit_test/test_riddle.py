@@ -8,7 +8,7 @@ class TestRiddle(TestCase):
 
     @patch('builtins.input', side_effect='1')
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_riddle_input_correct(self, mock_print, mock_input):
+    def test_riddle_input_correct(self, mock_print, _):
         actual = riddle({'xp': 0})
         the_game_printed_this = mock_print.getvalue()
         expected_output = "\nA stander asks you:" \
@@ -20,7 +20,7 @@ class TestRiddle(TestCase):
 
     @patch('builtins.input', side_effect='2')
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_riddle_input_incorrect(self, mock_print, mock_input):
+    def test_riddle_input_incorrect(self, mock_print, _):
         actual = riddle({'xp': 0})
         the_game_printed_this = mock_print.getvalue()
         expected_output = "\nA stander asks you:" \
@@ -32,7 +32,7 @@ class TestRiddle(TestCase):
 
     @patch('builtins.input', side_effect='4')
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_riddle_input_incorrect_max_choice(self, mock_print, mock_input):
+    def test_riddle_input_incorrect_max_choice(self, mock_print, _):
         actual = riddle({'xp': 0})
         the_game_printed_this = mock_print.getvalue()
         expected_output = "\nA stander asks you:" \
