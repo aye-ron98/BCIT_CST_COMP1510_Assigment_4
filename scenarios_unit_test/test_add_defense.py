@@ -8,7 +8,7 @@ class TestAddDefense(TestCase):
 
     @patch('random.randint', return_value=0)
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_treasure_zero_defence_gain(self, mock_print, mock_number):
+    def test_treasure_zero_defence_gain(self, mock_print, _):
         actual = add_defense({'defence': 0})
         the_game_printed_this = mock_print.getvalue()
         expected_output = "\nYou stubmle across an antique shop and leave with a " \
@@ -18,7 +18,7 @@ class TestAddDefense(TestCase):
 
     @patch('random.randint', return_value=2)
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_treasure_add_defence(self, mock_print, mock_number):
+    def test_treasure_add_defence(self, mock_print, _):
         actual = add_defense({'defence': 0})
         the_game_printed_this = mock_print.getvalue()
         expected_output = "\nYou stubmle across an antique shop and leave with a " \
@@ -28,7 +28,7 @@ class TestAddDefense(TestCase):
 
     @patch('random.randint', return_value=4)
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_treasure_add_max_defence(self, mock_print, mock_number):
+    def test_treasure_add_max_defence(self, mock_print, _):
         actual = add_defense({'defence': 0})
         the_game_printed_this = mock_print.getvalue()
         expected_output = "\nYou stubmle across an antique shop and leave with a " \
