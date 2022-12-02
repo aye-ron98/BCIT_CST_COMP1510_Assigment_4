@@ -32,8 +32,9 @@ def make_character() -> dict:
 
 def make_board(rows: int, columns: int) -> dict:
     """
-    Create a board for size rows x columns.
+    Return a dictionary of length equal rows x columns.
 
+    Generates the game board.
     :param rows: an integer
     :param columns: an integer
     :precondition rows: must be a nonzero positive integer
