@@ -8,7 +8,7 @@ class TestGetUserChoice(TestCase):
 
     @patch('builtins.input', side_effect='5')
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_get_user_choice_quit(self, mock_print, mock_input):
+    def test_get_user_choice_quit(self, mock_print, _):
         actual = get_user_choice({'exit': False})
         the_game_printed_this = mock_print.getvalue()
         expected_output = "1 move north\n" \
@@ -21,7 +21,7 @@ class TestGetUserChoice(TestCase):
 
     @patch('builtins.input', side_effect='1')
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_get_user_choice_north(self, mock_print, mock_input):
+    def test_get_user_choice_north(self, mock_print, _):
         actual = get_user_choice({'location': (4, 0), 'exit': False})
         the_game_printed_this = mock_print.getvalue()
         expected_output = "1 move north\n" \
@@ -94,7 +94,7 @@ class TestGetUserChoice(TestCase):
 
     @patch('builtins.input', side_effect=['2'])
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_get_user_choice_within_boundry_limit_y(self, mock_print, mock_input):
+    def test_get_user_choice_within_boundry_limit_y(self, mock_print, _):
         actual = get_user_choice({'location': (3, 3), 'exit': False, 'name': 'jerry'})
         the_game_printed_this = mock_print.getvalue()
         expected_output = "1 move north\n" \
