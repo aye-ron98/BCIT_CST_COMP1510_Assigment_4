@@ -31,22 +31,59 @@ Content of the project folder:
 
 ```
  Top level of project folder: 
-├── .gitignore               # Git ignore file
-├── index.html               # landing HTML file, this is what users see when you come to url
-└── README.md
+├── battle_unit_test         
+├── character_condition_unit_test 
+├── enemy_unit_test
+├── movment
+├── scenarios_unit_test 
+├── world_building_unit_test 
+├── AronZhang_aardwolf_level10.pdf 
+├── README.md
+├── battle_mechanics.py
+├── character_condition.py 
+├── enemy.py
+├── game.py			# run this to play the game!
+├── movement.py
+├── scenarios.py 
+└── world_building.py
 
-It has the following subfolders and files:
-├── .git                     # Folder for git repo
-├── images                   # Folder for images
-    /blah.jpg                # 
-├── scripts                  # Folder for scripts
-    /blah.js                 # 
-├── styles                   # Folder for styles
-    /blah.css                # 
+battle_unit_tests has the follwing subfolders and files:
+├── test_battle.py      
+├── test_battle_cards.py
+├── test_enemy_attack.py
+├── test_execute_final_boss.py
+├── test_player_attack.py
+├── test_remove_ulitmate.py
+├── test_roll_initative.py
 
-Firebase hosting files: 
-├── .firebaserc...
+character_coniditons_unit_tests has the follwing subfolders and files:
+├── test_character_has_leveled.py   
+├── test_character_health.py
+├── test_execute_glow_up_protocol.py
 
+enemy_unit_tests has the follwing subfolders and files:
+├── test_additonal_enemy_characterisitcs.py      
+├── test_enemy_name.py
+├── test_make_enemy.py
+├── test_make_final_boss.py
+
+movement has the follwing subfolders and files:
+├── test_exit_game.py        
+├── test_get_user_choice.py
+├── test_validate_location.py
+├── test_validate_move.py
+
+scenarios_unit_tests has the follwing subfolders and files:
+├── test_add_defense.py        
+├── test_add_health.py
+├── test_puzzle.py
+├── test_riddle.py
+├── test_treasure.py
+
+world_building_tests has the follwing subfolders and files:
+├── test_generate_encounters.py       
+├── test_make_board.py 
+├── test_make_character.py
 
 ```
 
