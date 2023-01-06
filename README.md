@@ -8,9 +8,47 @@ Aron Zhang
 Student Number:
 A01280188
 
-Comments:
-None for now.
+## 1. Project Description
+Final assigment a python game 
+	
+## 2. Technologies Used
+Technologies used for this project:
+* Python3
 
+## 3. Complete setup/installion/usage
+Here are the steps ...
+* clone this repo
+* open in VS code
+* naviagte to game.py and run
+* have fun!
+
+## 5. Known Bugs
+Here are some known bugs:
+* N/A
+	
+## 6. Contents of Folder
+Content of the project folder:
+
+```
+ Top level of project folder: 
+├── .gitignore               # Git ignore file
+├── index.html               # landing HTML file, this is what users see when you come to url
+└── README.md
+
+It has the following subfolders and files:
+├── .git                     # Folder for git repo
+├── images                   # Folder for images
+    /blah.jpg                # 
+├── scripts                  # Folder for scripts
+    /blah.js                 # 
+├── styles                   # Folder for styles
+    /blah.css                # 
+
+Firebase hosting files: 
+├── .firebaserc...
+
+
+```
 
 | Required Element         | module (line)          |
 |:-------------------------|:-----------------------|
